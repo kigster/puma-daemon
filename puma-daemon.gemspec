@@ -30,6 +30,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "puma", ">= 5.0"
   
+  spec.add_development_dependency "asciidoctor"
   spec.add_development_dependency "rspec-its"
   spec.add_development_dependency "relaxed-rubocop"
   # Uncomment to register a new dependency of your gem
