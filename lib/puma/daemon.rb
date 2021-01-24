@@ -7,10 +7,10 @@ require 'puma/dsl'
 require 'puma/cli'
 
 require 'puma/daemon/version'
-require 'puma/daemon/cli'
 require 'puma/daemon/runner'
-require 'puma/daemon/dsl'
 require 'puma/daemon/configuration'
+require 'puma/daemon/cli'
+require 'puma/daemon/dsl'
 
 module Puma
   module Daemon

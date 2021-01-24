@@ -5,8 +5,10 @@ require 'rspec/its'
 require 'simplecov'
 SimpleCov.start
 
-require 'codecov'
-SimpleCov.formatter = SimpleCov::Formatter::Codecov
+if ENV['CODECOV_TOKEN']
+  require 'codecov'
+  SimpleCov.formatter = SimpleCov::Formatter::Codecov
+end
 
 require_relative 'support/puma_helpers'
 require 'puma/daemon'

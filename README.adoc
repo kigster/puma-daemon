@@ -1,25 +1,40 @@
 = Puma::Daemon
-image::https://github.com/kigster/puma-daemon/workflows/Ruby/badge.svg[link=https://github.com/kigster/puma-daemon/actions?query=workflow%3ARuby]
-image::https://codecov.io/gh/kigster/puma-daemon/branch/master/graph/badge.svg?token=asxarMSGbz[link=https://codecov.io/gh/kigster/puma-daemon]
-
 :toc:
 :toclevels: 4
 :sectnums:
+:icons: font
 
-In version 5.0 the authors of a popular Ruby web server https://github.com/puma/puma[Puma] chose to https://github.com/puma/puma/pull/2170/files[remove the daemonization] support from Puma, because the code wasn't wall maintained, and because other and perhaps better options exist (such as `systemd`, etc), not to mention many people have switched to Kubernetes and Docker, where you want to start all servers on the foreground.
+image:https://github.com/kigster/puma-daemon/workflows/Ruby/badge.svg[link=https://github.com/kigster/puma-daemon/actions?query=workflow%3ARuby] image:https://codecov.io/gh/kigster/puma-daemon/branch/master/graph/badge.svg?token=asxarMSGbz[link=https://codecov.io/gh/kigster/puma-daemon]
 
-And yet, something useful and simple got lost — in our humble opinion. Some folks were indeed using the `--daemonize` features, and in Ruby they are so simple to implement due to `Process.daemon(true)` system library.
+In version 5.0 of the popular Ruby HTTP server https://github.com/puma/puma[Puma] the developers chose to https://github.com/puma/puma/pull/2170/files[drop the daemonization] support from Puma. They did that because the code wasn't actively maintained. Other and perhaps better options now exist (such as `systemd`, etc), not to mention that many people have switched to Kubernetes and Docker, where you generally want to start all servers in the foreground.
+
+And yet, on occasion, it was rather useful and straightforward to use the built-in daemonization feature that was cross-platform and is now gone. Some folks are still using this feature and are therefore stuck with Puma version 4, or must wrap Puma either in the `systemd` manifest or `launchctl plist` on Mac OS-X, or a Docker container. Well, **not anymore!** 
+
+NOTE: Add this gem to your dependencies, and make a one line change either in your `config/puma.rb` file, or use `pumad` binary to start Puma as per usual, and you can even leave `-d` flags there (they are ignored when started via `pumad`, and Puma always goes to the background when started that way).
+
+One of the nice features of the old daemonization functionality was that it worked across all platforms. 
 
 So, if you want to use the latest and greatest Puma 5+, but have it self-daemonize, this gem is for you.
 
-[NOTE]
-====
-The goal of this gem was to surgically augment Puma's source code to restore daemonization by merely requiring this gem. 
+== Compatility
 
-While this was a nice goal, it has not been accomplished in the current version.  The internals of Puma are not always written with external augmentation in mind, for example, we couldn't think of a way to add back the `-d` flags to the Option Parsing routine without having to rewrite the entire method: — which is *not a good solution, because if Puma adds new flags in the future, we would have to keep this overridden method constantly updated, and potentially different depending on the version of Puma you are using.
+We did not restore the daemonization code for JRuby; so at the moment this will work with the MRI distribution,  and possibly others that support `Process.daemon(true)`.
 
-This is why we took instead the approach that requires you — the user — to make a couple of small changes in your Puma configuration to bring daemonization back, or in your scripts change `puma` to `pumad` and everything will just work.
-====
+We currently run CI suite on Github Actions against
+
+ * MRI Ruby 3.0.0
+ * MRI Ruby 2.7.2
+ * MRI Ruby 2.6.6
+ * MRI Ruby 2.5.7
+
+
+== Design Decisions 
+
+This gem's goal was to surgically augment Puma's source code to restore daemonization by merely requiring `puma/daemon`. We almost got there, but not quite.
+
+While this was an admirable goal, it has not been accomplished in the current version.  The internals of Puma isn't very easy to monkey-patch or augment. For example, we couldn't think of a way to add back the `-d` flags to the Option Parsing method without having to override the entire method: — which is _not a good solution_, because — what if Puma developers add a new flag in the future? We would have to keep this overridden method frequently updated and potentially choose a different version depending on what version of Puma you are using. That sounds like a nightmare.
+
+It is why instead, we took an approach that requires you — the user — to make a couple of small changes in your Puma configuration to bring daemonization back, or in your scripts, change `puma` to `pumad`, and everything should work. If you run into problems, please https://github.com/kigster/puma-daemon/issues/new[submit an issue].
 
 == Installation
 
@@ -27,7 +42,7 @@ Add this line to your application's Gemfile:
 
 [source,ruby]
 ----
-gem 'puma-daemon'
+gem 'puma-daemon', require: false
 gem 'puma',  '~> 5'
 ----
 
@@ -35,19 +50,14 @@ And then execute:
 
  $ bundle install
 
-Or install it yourself as:
-
- $ gem install puma -N
- $ gem install puma-daemon -N
-
 == Usage
 
-There were two main ways you could daemonize Puma in the past:
+There were two ways you could daemonize Puma in the past:
 
  1. By specifying `daemonize` or `daemonize(true)` in your config file.
  2. Or, by passing a `-d` or `--daemonize` command line flag.
 
-This gem allows you to daemonize using both ways, but with a small change in each case.
+This gem allows you to daemonize using both ways, but with a small caveat in each case.
 
 Please note that both ways require you to include this gem in your Gemfile, but you may specify it as `require: false` — it will only activate if you explicitly require it, or use `pumad` executable.
 
@@ -67,14 +77,14 @@ threads 2,3
 daemonize 
 ----
 
-With this method you can continue using the standard `puma` executable to get it started, and as long remove any `-d` from the command line, or puma will fail with an error.
+With this method you can continue using the standard `puma` executable to get it started, but (and this is important) — **you must remove any `-d` or `--daemonize` from the command line**, or Puma v5 and above will fail with an error.
 
-Here is an example of daemonizing via the config file shown above:
+Here is an example of daemonizing via the config file shown above, and using the regular `puma` binary:
 
 [source,bash]
 ----
 ❯ gem install puma-daemon puma -N
-❯ pumad -C config/puma.rb config.ru
+❯ puma -C config/puma.rb config.ru
 
 [98795] Puma starting in cluster mode...
 [98795] * Puma version: 5.1.1 (ruby 2.7.2-p137) ("At Your Service")
@@ -85,7 +95,7 @@ Here is an example of daemonizing via the config file shown above:
 [98795] *      Workers: 3
 [98795] *     Restarts: (✔) hot (✔) phased
 [98795] * Listening on http://0.0.0.0:3001
-[98795] * Daemonizing...
+[98795] *  Puma Daemon: Daemonizing (puma-daemon v0.1.1)...
 ----
 
 Note that using this method you can decide whether to daemonize or not by passing true or false to the `daemonize` method.
@@ -114,7 +124,7 @@ If you replace `puma` with `pumad` — you no longer need to pass any aditional 
 [98795] *      Workers: 3
 [98795] *     Restarts: (✔) hot (✔) phased
 [98795] * Listening on http://0.0.0.0:3000
-[98795] * Daemonizing...
+[98795] *  Puma Daemon: Daemonizing (puma-daemon v0.1.1)...
 ----
 
 As you can see, at the end it says "Daemonizing".

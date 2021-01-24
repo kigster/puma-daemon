@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'version'
+
 module Puma
   module Daemon
     module Runner
@@ -16,7 +18,7 @@ module Puma
       end
 
       def daemonize!
-        log '* Daemonizing...'
+        log "*  Puma Daemon: Daemonizing (puma-daemon v#{::Puma::Daemon::VERSION})..."
         Process.daemon(true)
       end
 
