@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: [3.0.0, 2.7.2, 2.6.6, 2.5.7]
+        ruby-version: [3.0.0, 2.7.2, 2.6.6, 2.5.7, 2.4.10]
 
     steps:
     - uses: actions/checkout@v2
@@ -18,6 +18,9 @@ jobs:
     - name: Install dependencies
       run: bundle install
     - name: Run RSpecs
-      run: bundle exec rspec
+      run: bundle exec rspec --color
     - name: Run Rubocop
-      run: bundle exec rspec
+      run: bundle exec rubocop
+    - name: Upload Code Coverage
+      run: bash <(curl -s https://codecov.io/bash)
+

@@ -5,8 +5,10 @@ require 'rspec/its'
 require 'simplecov'
 SimpleCov.start
 
-require_relative 'support/puma_helpers'
+require 'codecov'
+SimpleCov.formatter = SimpleCov::Formatter::Codecov
 
+require_relative 'support/puma_helpers'
 require 'puma/daemon'
 
 RSpec.configure do |config|
