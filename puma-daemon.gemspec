@@ -8,8 +8,24 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Konstantin Gredeskoul']
   spec.email         = ['kigster@gmail.com']
 
-  spec.summary       = 'Daemonize puma without any external OS-dependent method'
-  spec.description   = 'Daemonize puma without any external OS-dependent method'
+  spec.summary       = "Restore somewhat Puma's ability to self-daemonize, since Puma 5.0 dropped it"
+  spec.description   = <<~EOF
+
+      In version 5.0 the authors of the popular Ruby web server Puma chose
+      to remove the daemonization support from Puma, because the code wasn't wall maintained, 
+      and because other and perhaps better options exist (such as systemd, etc), not to 
+      mention many people have switched to Kubernetes and Docker, where you want to start 
+      all servers on the foreground.
+
+      And yet, something useful and simple got lost — in our humble opinion. Some folks were 
+      indeed happily using the `--daemonize` feature until in 5.0 they got an error that this flag is 
+      not supported.
+
+      So, if you want to use the latest and greatest Puma 5+, but have it self-daemonize, 
+      this gem is for you. Just use *pumad* binary instead of *puma*, or require 'puma/daemon' inside
+      your config file.
+  EOF
+
   spec.homepage      = 'https://github.com/kig/puma-daemon'
   spec.license       = 'MIT'
 

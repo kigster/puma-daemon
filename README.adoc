@@ -11,7 +11,7 @@ And yet, something useful and simple got lost — in our humble opinion. Some fo
 
 So, if you want to use the latest and greatest Puma 5+, but have it self-daemonize, this gem is for you.
 
-NOTE: The goal of this gem was to carefully and surgically augment Puma's source code to restore daemonization by merely requiring this gem. While this is a nice goal, the internals of Puma are not always written with external augmentation in mind, and so — for example — modifying the CLI parsing to add back `-d` flag would have required duplicating the entire option parsing method: not a good solution if they add new flags in the future. This is why we took the approach that does require you to make a couple of small changes in your configuration or in your scripts to enable puma -d back. 
+NOTE: The goal of this gem was to carefully and surgically augment Puma's source code to restore daemonization by merely requiring this gem. While this is a nice goal, the internals of Puma are not always written with external augmentation in mind, and so — for example — modifying the CLI parsing to add back `-d` flag would have required duplicating the entire option parsing method: not a good solution if they add new flags in the future. This is why we took the approach that does require you to make a couple of small changes in your configuration or in your scripts to enable puma -d back. x
 
 == Installation
 
