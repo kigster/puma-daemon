@@ -1,9 +1,10 @@
 = Puma::Daemon
+image::https://github.com/kigster/puma-daemon/workflows/Ruby/badge.svg[link=https://github.com/kigster/puma-daemon/actions?query=workflow%3ARuby]
+image::https://codecov.io/gh/kigster/puma-daemon/branch/master/graph/badge.svg?token=asxarMSGbz[link=https://codecov.io/gh/kigster/puma-daemon]
+
 :toc:
 :toclevels: 4
 :sectnums:
-
-image::https://github.com/kigster/puma-daemon/workflows/Ruby/badge.svg[link=https://github.com/kigster/puma-daemon/actions?query=workflow%3ARuby]
 
 In version 5.0 the authors of a popular Ruby web server https://github.com/puma/puma[Puma] chose to https://github.com/puma/puma/pull/2170/files[remove the daemonization] support from Puma, because the code wasn't wall maintained, and because other and perhaps better options exist (such as `systemd`, etc), not to mention many people have switched to Kubernetes and Docker, where you want to start all servers on the foreground.
 
