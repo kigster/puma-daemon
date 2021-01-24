@@ -1,8 +1,10 @@
 = Puma::Daemon
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/puma/daemon`. To experiment with that code, run `bin/console` for an interactive prompt.
+In version 5.0 the authors of a popular Ruby web server https://github.com/puma/puma[Puma] chose to https://github.com/puma/puma/pull/2170/files[remove the daemonization] support, because other options exist (such as systemd, etc), not to mention many people have switched to Kubernetes and Docker, where you want to start the servers on the foreground.
 
-TODO: Delete this and the text above, and describe your gem
+And yet, something useful and simple got lost in our opinion. Some folks were indeed using the automatic daemonization features, and so if you want to use Puma 5+ with daemonization enabled, this ruby gem is for you.
+
+While it doesn't completely restore daemonization to the full parity, it gets pretty close.
 
 == Installation
 
@@ -23,7 +25,80 @@ Or install it yourself as:
 
 == Usage
 
-Work in progress.
+There were two main ways you could daemonize Puma in the past:
+
+ 1. By specifying `daemonize` or `daemonize(true)` in your config file.
+ 2. By passing a `-d` or `--daemonize` command line flag.
+
+=== Config File
+
+If you want to specify `daemonize` in your config file, simply include `require 'puma/daemon'` at the top of your config file:
+
+[source,ruby]
+----
+# file: config/puma.rb
+require 'puma/daemon'
+
+port 3001
+workers 3
+threads 2,3
+daemonize
+----
+
+With this method you can continue using the standard `puma` executable to get it started, as long as you not also passing `-d` on the command line — puma executable will reject this command line option.
+
+
+[source,bash]
+----
+❯ gem install puma-daemon puma -N
+
+❯ be pumad -C config/puma.rb config.ru
+
+[98795] Puma starting in cluster mode...
+[98795] * Puma version: 5.1.1 (ruby 2.7.2-p137) ("At Your Service")
+[98795] *  Min threads: 2
+[98795] *  Max threads: 8
+[98795] *  Environment: production
+[98795] *   Master PID: 98795
+[98795] *      Workers: 3
+[98795] *     Restarts: (✔) hot (✔) phased
+[98795] * Listening on http://0.0.0.0:3000
+[98795] * Daemonizing...
+----
+
+Also, note that using this method you can turn off the daemonize behavior by passing `false` to the `daemonize` method in your config.
+
+=== Daemonizing on the Command Line
+
+If you specify whether you want to daemonize Puma via the CLI, the only change you must make is which executable you are starting.
+
+NOTE: We did not want to conflict with the `puma` gem by introducing another executable under the same name. The executable this gem provides is called `pumad` (where 'd' stands for daemon, and follows standard UNIX convention, as in eg `sshd`, `ftpd`, etc).
+
+If you replace `puma` with `pumad` — you no longer need to pass any aditional command line flag t ocontinue passing it `-d` or you can remove it (both `-d` and `--daemonize` are stripped out before ARGV is passed onto Puma's CLI parser.)
+
+[source,bash]
+----
+❯ gem install puma --version 5.1.1 -N
+❯ gem install puma-daemon -N
+
+❯ be pumad -C config/puma.rb spec/rackup/bind.ru
+
+[98795] Puma starting in cluster mode...
+[98795] * Puma version: 5.1.1 (ruby 2.7.2-p137) ("At Your Service")
+[98795] *  Min threads: 2
+[98795] *  Max threads: 8
+[98795] *  Environment: production
+[98795] *   Master PID: 98795
+[98795] *      Workers: 3
+[98795] *     Restarts: (✔) hot (✔) phased
+[98795] * Listening on http://0.0.0.0:3000
+[98795] * Daemonizing...
+----
+
+As you can see, at the end it says "Daemonizing".
+
+If you start puma this way, you can still specify `daemonize(false)` in the configuration file to turn it off, but the default is to daemonize. Also, if you start with `pumad` you do not need to include `require 'puma/daemon'` in your configuration file, as the `pumad` binary loads all dependencies prior to parsing the config.
+
 
 == Development
 

@@ -2,7 +2,6 @@ require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
 require 'rubocop/rake_task'
 require 'yard'
-require 'timeout'
 
 def shell(*args)
   puts "running: #{args.join(' ')}"
@@ -10,33 +9,28 @@ def shell(*args)
 end
 
 task :clean do
-  shell('rm -rf pkg/ tmp/ coverage/ doc/ ' )
+  shell('rm -rf pkg/ tmp/ coverage/ doc/ ')
 end
 
-task :gem => [:build] do
+task gem: [:build] do
   shell('gem install pkg/*')
 end
 
-task :permissions => [ :clean ] do
+task permissions: [:clean] do
   shell("chmod -v o+r,g+r * */* */*/* */*/*/* */*/*/*/* */*/*/*/*/*")
   shell("find . -type d -exec chmod o+x,g+x {} \\;")
 end
 
-task :build => :permissions
+task build: :permissions
 
 YARD::Rake::YardocTask.new(:doc) do |t|
-  t.files = %w(lib/**/*.rb exe/*.rb - README.adoc CHANGELOG.md LICENSE)
-  t.options.unshift('--title', '"Sym – Symmetric Encryption for Humins"')
-  t.after = -> { Thread.new { sleep 5; exec('open doc/index.html') }  }
+  t.files = %w[lib/**/*.rb exe/*.rb - README.adoc CHANGELOG.md LICENSE.txt]
+  t.options.unshift('--title', '"Puma Daemon"')
+  t.after = -> { exec('open doc/index.html') }
 end
 
 RSpec::Core::RakeTask.new(:spec)
 
 RuboCop::RakeTask.new
 
-task :default => :spec
-
-
-
-
-
+task default: :spec

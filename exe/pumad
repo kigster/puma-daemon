@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require 'puma/daemon'
+
+# If we are passing -d or --daemonize, do so
+# otherwise invoke to the original puma
+if (ARGV & %w[-d --daemonize]).size.positive?
+  ARGV.delete '-d'
+  ARGV.delete '--daemonize'
+end
+
+Puma::Daemon::CLI.new(ARGV)&.run

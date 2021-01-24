@@ -12,7 +12,7 @@ Gem::Specification.new do |spec|
   spec.description   = "Daemonize puma without any external OS-dependent method"
   spec.homepage      = "https://github.com/kig/puma-daemon"
   spec.license       = "MIT"
-  
+
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
   spec.metadata["homepage_uri"] = spec.homepage
@@ -29,10 +29,14 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_dependency "puma", ">= 5.0"
-  
+  spec.add_dependency "rack"
+
   spec.add_development_dependency "asciidoctor"
-  spec.add_development_dependency "rspec-its"
   spec.add_development_dependency "relaxed-rubocop"
+  spec.add_development_dependency "rspec-its"
+  spec.add_development_dependency "rubocop"
+  spec.add_development_dependency "simplecov"
+  spec.add_development_dependency "yard"
   # Uncomment to register a new dependency of your gem
   # spec.add_dependency "example-gem", "~> 1.0"
 
