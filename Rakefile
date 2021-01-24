@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
 require 'rubocop/rake_task'
@@ -17,8 +19,8 @@ task gem: [:build] do
 end
 
 task permissions: [:clean] do
-  shell("chmod -v o+r,g+r * */* */*/* */*/*/* */*/*/*/* */*/*/*/*/*")
-  shell("find . -type d -exec chmod o+x,g+x {} \\;")
+  shell('chmod -v o+r,g+r * */* */*/* */*/*/* */*/*/*/* */*/*/*/*/*')
+  shell('find . -type d -exec chmod o+x,g+x {} \\;')
 end
 
 task build: :permissions
@@ -33,4 +35,4 @@ RSpec::Core::RakeTask.new(:spec)
 
 RuboCop::RakeTask.new
 
-task default: :spec
+task default: %i[spec rubocop]

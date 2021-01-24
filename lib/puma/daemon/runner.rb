@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Puma
   module Daemon
     module Runner
@@ -19,7 +21,7 @@ module Puma
       end
 
       def log(str)
-        super(str) unless str == "Use Ctrl-C to stop"
+        super(str) unless str == 'Use Ctrl-C to stop'
       end
     end
   end

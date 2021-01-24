@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 module Puma
@@ -22,7 +24,7 @@ module Puma
       context 'user_dsl' do
         subject { config.user_dsl.options }
         its([:daemon]) { should be true }
-        its([:binds]) { should eq ["tcp://0.0.0.0:3001"] }
+        its([:binds]) { should eq ['tcp://0.0.0.0:3001'] }
       end
 
       describe 'config: daemonize(false)' do
@@ -36,13 +38,13 @@ module Puma
       context 'file_dsl' do
         let(:config) do
           ::Puma::Configuration.new do |c|
-            c.rackup "spec/rackup/bind.ru"
-          end.tap { |config| config.load }
+            c.rackup 'spec/rackup/bind.ru'
+          end.tap(&:load)
         end
 
         subject { config.options }
 
-        its([:binds]) { should eq ["tcp://0.0.0.0:3000"] }
+        its([:binds]) { should eq ['tcp://0.0.0.0:3000'] }
         its([:daemon]) { should be true }
       end
     end

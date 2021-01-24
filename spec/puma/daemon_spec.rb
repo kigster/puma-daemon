@@ -29,7 +29,7 @@ module Puma
 
       @wait, @ready = IO.pipe
 
-      events.on_booted { @ready << "!" }
+      events.on_booted { @ready << '!' }
     end
 
     after do
@@ -55,12 +55,12 @@ module Puma
         describe Cluster do
           let(:url) { "unix://#{@tmp_path}" }
           let(:argv) do
-            ["-b", "unix://#{@tmp_path2}",
-             "-t", "2:2",
-             "-w", "2",
-             "--control-url", url,
-             "--control-token", "",
-             "spec/rackup/lobster.ru"]
+            ['-b', "unix://#{@tmp_path2}",
+             '-t', '2:2',
+             '-w', '2',
+             '--control-url', url,
+             '--control-token', '',
+             'spec/rackup/lobster.ru']
           end
 
           it { is_expected.to respond_to :daemonize! }

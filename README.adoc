@@ -65,7 +65,7 @@ With this method you can continue using the standard `puma` executable to get it
 [98795] * Listening on http://0.0.0.0:3000
 [98795] * Daemonizing...
 ----
-
+ 
 Also, note that using this method you can turn off the daemonize behavior by passing `false` to the `daemonize` method in your config.
 
 === Daemonizing on the Command Line

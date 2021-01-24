@@ -1,12 +1,21 @@
-inherit_from: .rubocop_todo.yml
+inherit_gem:
+  relaxed-rubocop: .rubocop.yml
+
+AllCops:
+  TargetRubyVersion: 2.4
+  NewCops: enable
+
+Style/OptionalBooleanParameter:
+  Exclude:
+    - 'lib/puma/daemon/dsl.rb'
 
 Style/StringLiterals:
   Enabled: true
-  EnforcedStyle: double_quotes
+  EnforcedStyle: single_quotes
 
 Style/StringLiteralsInInterpolation:
   Enabled: true
-  EnforcedStyle: double_quotes
+  EnforcedStyle: single_quotes
 
 Layout/LineLength:
   Max: 120

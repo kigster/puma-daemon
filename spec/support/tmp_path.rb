@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TmpPath
   def clean_tmp_paths
     while (path = tmp_paths.pop)
@@ -8,7 +10,7 @@ module TmpPath
   private
 
   def tmp_path(extension = nil)
-    path = Tempfile.create(['', extension]) { |f| f.path }
+    path = Tempfile.create(['', extension], &:path)
     tmp_paths << path
     path
   end
