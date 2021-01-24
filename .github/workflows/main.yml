@@ -10,9 +10,14 @@ jobs:
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.0.0
-    - name: Run the default task
+        ruby-version: [ "3.0.0", "2.7.2" ]
+    - name: Install dependencie
       run: |
         gem install bundler -v 2.2.4
         bundle install
-        bundle exec rake
+    - name: Run Specs
+      run: |
+        bundle exec rspec
+    - name: Run Rubocop
+      run: |
+        bundle exec rubocop
