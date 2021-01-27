@@ -35,7 +35,6 @@ ENV TERM=xterm-256color \
     DEBIAN_FRONTEND=noninteractive \
     DEBCONF_NONINTERACTIVE_SEEN=true \
     TZ=Pacific/Los_Angeles
-  
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apt-get update -y && \
@@ -74,15 +73,13 @@ RUN set -e && \
 RUN echo 'powerline.prompt.set-right-to ruby go user_info ssh clock' >>${SHELL_INIT} && \
     echo 'export POWERLINE_PROMPT_CHAR="#"' >>${SHELL_INIT}
 
+ENV PUMAD_HOME=/app/puma-daemon
 RUN mkdir -p ${PUMAD_HOME}
 COPY . ${PUMAD_HOME}
-
 WORKDIR ${PUMAD_HOME}
-
-RUN cd ${PUMAD_HOME} && \
-    direnv allow . && \
-    pwd -P && \
-    ls -al
-
+RUN bundle install
+RUN echo "source ${PUMAD_HOME}/.envrc" >>${SHELL_INIT}
+RUN bash -c "cd ${PUMAD_HOME}; direnv allow . "
 ENTRYPOINT /bin/bash -l
+
 

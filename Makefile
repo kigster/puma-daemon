@@ -22,7 +22,10 @@ docker-build-ruby:		## Builds the Docker image by compiling ruby 3.0.0
 docker-download-ruby:		## Builds the Docker image by downloading ruby 3.0.0 image
 				@docker build -f Dockerfile.download -t puma-daemon:latest .
 
-docker-bash: 			docker-download-ruby ## Drops you into a BASH session on ubuntu with ruby 3.0.0
+docker-build-run: 		docker-build-ruby ## Drops you into a BASH session on ubuntu with ruby 3.0.0
+				@docker run -it puma-daemon:latest
+
+docker-download-run: 		docker-download-ruby ## Drops you into a BASH session on ubuntu with ruby 3.0.0
 				@docker run -it puma-daemon:latest
 
  
