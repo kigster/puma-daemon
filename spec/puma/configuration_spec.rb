@@ -39,6 +39,7 @@ module Puma
         let(:config) do
           ::Puma::Configuration.new do |c|
             c.rackup 'spec/rackup/bind.ru'
+            c.port 3000
           end.tap(&:load)
         end
 

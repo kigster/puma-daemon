@@ -1,0 +1,85 @@
+# Thi Dockerfile is provided so that we can eventually build 
+# Linux support for the bin/setup script.
+#
+# vim: ft=Dockerfile
+# 
+# © 2021 Konstantin Gredeskoul, All rights reserved, MIT License.
+# 
+# docker build . -t puma-daemon:latest
+# docker run -it puma-daemon:latest
+#
+# Once in the container: 
+#    
+#    # Run specs in Linux:
+#    $ specs
+#    
+#    # Test encryption:
+#    $ encrypt word
+#    
+
+FROM ubuntu:latest
+
+RUN apt-get update -y && \
+    apt-get install -yqq \
+    build-essential \
+    git \
+    python3-pip \
+    libssl-dev
+
+ENV TERM=xterm-256color \
+    LC_ALL=en_US.UTF-8 \
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US.UTF-8 \
+    USER=root \
+    HOME=/root \
+    DEBIAN_FRONTEND=noninteractive \
+    DEBCONF_NONINTERACTIVE_SEEN=true \
+    TZ=Pacific/Los_Angeles
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update -y && \
+    apt-get install -yqq locales
+
+RUN locale-gen en_US.UTF-8
+
+RUN apt-get update -y && \
+    apt-get install -yqq \
+    silversearcher-ag \
+    curl \
+    vim \
+    htop \
+    direnv \
+    sudo
+
+
+ENV PATH="/root/.rbenv/bin:/root/.rbenv/shims:$PATH"
+
+# Install rbenv in ~/.rbenv
+# https://github.com/rbenv/rbenv-installer#rbenv-installer 
+RUN /bin/bash -c 'curl -fsSL https://github.com/rbenv/rbenv-installer/raw/master/bin/rbenv-installer | bash || true'
+RUN /bin/bash -c 'eval "$(rbenv init -)"; rbenv install -sv 3.0.0 && rbenv global 3.0.0'
+
+ENV SHELL_INIT="${HOME}/.bashrc"
+
+RUN set -e && \
+    cd ${HOME} && \
+    git clone https://github.com/kigster/bash-it .bash_it && \
+    cd .bash_it && \
+    ./install.sh -s && \
+    sed -i'' -E 's/bobby/powerline-multiline/g' ${SHELL_INIT} && \
+    echo 'eval "$(direnv hook bash)"' >>${SHELL_INIT} && \
+    gem install sym --no-document >/dev/null
+
+RUN echo 'powerline.prompt.set-right-to ruby go user_info ssh clock' >>${SHELL_INIT} && \
+    echo 'export POWERLINE_PROMPT_CHAR="#"' >>${SHELL_INIT}
+
+ENV PUMAD_HOME=/app/puma-daemon
+RUN mkdir -p ${PUMAD_HOME}
+COPY . ${PUMAD_HOME}
+WORKDIR ${PUMAD_HOME}
+RUN bundle install
+RUN echo "source ${PUMAD_HOME}/.envrc" >>${SHELL_INIT}
+RUN bash -c "cd ${PUMAD_HOME}; direnv allow . "
+ENTRYPOINT /bin/bash -l
+
+
