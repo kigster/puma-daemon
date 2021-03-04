@@ -68,6 +68,8 @@ If you want to specify `daemonize` in your config file, simply include `require 
 [source,ruby]
 ----
 # file: config/puma.rb
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkigster%2Fpuma-daemon.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkigster%2Fpuma-daemon?ref=badge_shield)
+
 require 'puma/daemon'
 
 port 3001
@@ -145,3 +147,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/kigste
 == License
 
 The gem is available as open source under the terms of the https://opensource.org/licenses/MIT[MIT License].
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkigster%2Fpuma-daemon.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fkigster%2Fpuma-daemon?ref=badge_large)
