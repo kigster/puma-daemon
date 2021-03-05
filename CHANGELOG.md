@@ -1,5 +1,18 @@
 # Changelog
 
+## [v0.1.2](https://github.com/kigster/puma-daemon/tree/v0.1.2) (2021-03-05)
+
+[Full Changelog](https://github.com/kigster/puma-daemon/compare/v0.1.1...v0.1.2)
+
+**Fixed bugs:**
+
+- uninitialized constant Puma::HAS\_SSL \(NameError\) [\#3](https://github.com/kigster/puma-daemon/issues/3)
+
+**Merged pull requests:**
+
+- Hoping to fix HAS\_SSL error [\#5](https://github.com/kigster/puma-daemon/pull/5) ([kigster](https://github.com/kigster))
+- Adding dockerfiles for testing Puma on Linux [\#2](https://github.com/kigster/puma-daemon/pull/2) ([kigster](https://github.com/kigster))
+
 ## [v0.1.1](https://github.com/kigster/puma-daemon/tree/v0.1.1) (2021-01-24)
 
 [Full Changelog](https://github.com/kigster/puma-daemon/compare/v0.1.0...v0.1.1)
