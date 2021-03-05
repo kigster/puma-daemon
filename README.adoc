@@ -6,13 +6,15 @@
 
 image:https://github.com/kigster/puma-daemon/workflows/Ruby/badge.svg[link=https://github.com/kigster/puma-daemon/actions?query=workflow%3ARuby] image:https://codecov.io/gh/kigster/puma-daemon/branch/master/graph/badge.svg?token=asxarMSGbz[link=https://codecov.io/gh/kigster/puma-daemon]
 
+== Motivation
+
 In version 5.0 of the popular Ruby HTTP server https://github.com/puma/puma[Puma] the developers chose to https://github.com/puma/puma/pull/2170/files[drop the daemonization] support from Puma. They did that because the code wasn't actively maintained. Other and perhaps better options now exist (such as `systemd`, etc), not to mention that many people have switched to Kubernetes and Docker, where you generally want to start all servers in the foreground.
 
-And yet, on occasion, it was rather useful and straightforward to use the built-in daemonization feature that was cross-platform and is now gone. Some folks are still using this feature and are therefore stuck with Puma version 4, or must wrap Puma either in the `systemd` manifest or `launchctl plist` on Mac OS-X, or a Docker container. Well, **not anymore!** 
+And yet, on occasion, it was rather useful and straightforward to use the built-in daemonization feature that was cross-platform and is now gone. Some folks are still using this feature and are therefore stuck with Puma version 4, or must wrap Puma either in the `systemd` manifest or `launchctl plist` on Mac OS-X, or a Docker container. Well, **not anymore!**
 
 NOTE: Add this gem to your dependencies, and make a one line change either in your `config/puma.rb` file, or use `pumad` binary to start Puma as per usual, and you can even leave `-d` flags there (they are ignored when started via `pumad`, and Puma always goes to the background when started that way).
 
-One of the nice features of the old daemonization functionality was that it worked across all platforms. 
+One of the nice features of the old daemonization functionality was that it worked across all platforms.
 
 So, if you want to use the latest and greatest Puma 5+, but have it self-daemonize, this gem is for you.
 
@@ -27,8 +29,12 @@ We currently run CI suite on Github Actions against
  * MRI Ruby 2.6.6
  * MRI Ruby 2.5.7
 
+=== Known Issues
 
-== Design Decisions 
+WARNING: Currently daemonization does not work in the **Single mode**. You must specify at least 2 workers to enable the **Cluster mode**. We are currently https://github.com/kigster/puma-daemon/issues/1[looking into this problem].
+
+
+== Design Decisions
 
 This gem's goal was to surgically augment Puma's source code to restore daemonization by merely requiring `puma/daemon`. We almost got there, but not quite.
 
@@ -74,7 +80,7 @@ port 3001
 workers 3
 threads 2,3
 # accepts true or false, and if false is passed will NOT daemonize
-daemonize 
+daemonize
 ----
 
 With this method you can continue using the standard `puma` executable to get it started, but (and this is important) — **you must remove any `-d` or `--daemonize` from the command line**, or Puma v5 and above will fail with an error.
