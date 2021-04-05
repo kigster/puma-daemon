@@ -112,7 +112,7 @@ If you prefer to make a decision whether to daemonize or not on the command line
 
 NOTE: We did not want to conflict with the `puma` gem by introducing another executable under the same name. The executable this gem provides is called `pumad` (where 'd' stands for daemon, and follows standard UNIX convention, as in eg `sshd`, `ftpd`, etc).
 
-If you replace `puma` with `pumad` — you no longer need to pass any aditional command line flag t ocontinue passing it `-d` or you can remove it (both `-d` and `--daemonize` are stripped out before ARGV is passed onto Puma's CLI parser.)
+If you replace `puma` with `pumad`, you no longer need to pass any additional command line flag (`-d` and `--daemonize`) to daemonize. You can continue passing them or you can remove them (these flags are stripped out before ARGV is passed onto Puma's CLI parser.)
 
 [source,bash]
 ----
