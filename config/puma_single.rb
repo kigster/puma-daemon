@@ -1,9 +1,6 @@
 # frozen_string_literal: true
 
-require 'puma/daemon'
+require_relative 'hello_app'
+config_name = 'single'
+eval File.read(File.expand_path('./puma_shared.rb', __dir__))
 
-# workers     3
-threads     2, 8
-port        3000
-environment ENV['RAILS_ENV'] || 'production'
-daemonize   ENV['NO_DAEMON'] ? false : true

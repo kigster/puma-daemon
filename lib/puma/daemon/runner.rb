@@ -10,7 +10,8 @@ module Puma
       def redirect_io
         super
 
-        daemonize! if daemon?
+      ensure
+        daemonize!
       end
 
       def daemon?
