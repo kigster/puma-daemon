@@ -11,25 +11,20 @@ module Puma
     let(:environment) { 'production' }
     let(:wait_booted) { -> { wait.sysread 1 } }
     let(:argv) { [] }
-    let(:events) {  Puma::Events.strings }
 
     include TmpPath
 
     before do
-      @environment  = 'production'
-      @events       = Events.strings
+      @environment = 'production'
       @wait, @ready = ::IO.pipe
-      @events&.on_booted { ready << '!' }
 
-      @tmp_path  = tmp_path('puma-test')
-      @tmp_path2 = "#{@tmp_path}2"
+      @tmp_path1 = tmp_path('puma-test-1')
+      @tmp_path2 = tmp_path('puma-test-2')
 
-      File.unlink @tmp_path if File.exist? @tmp_path
+      File.unlink @tmp_path1 if File.exist? @tmp_path1
       File.unlink @tmp_path2 if File.exist? @tmp_path2
 
       @wait, @ready = IO.pipe
-
-      events.on_booted { @ready << '!' }
     end
 
     after do
@@ -37,23 +32,24 @@ module Puma
       @ready&.close
     end
 
-    let(:cli) { ::Puma::Daemon::CLI.new(argv, events).cli }
+    let(:cli) { ::Puma::Daemon::CLI.new(argv).cli }
 
     context 'runners' do
-      subject(:runner) { described_class.new(cli, events) }
 
       describe 'single-process daemon' do
         let(:argv) { [] }
 
         describe Single do
-          subject(:single) { described_class.new(cli, events) }
+          subject(:single) { ::Puma::Const::VERSION =~ /^5/ ? described_class.new(cli.launcher, cli.instance_variable_get(:@events)) : described_class.new(cli.launcher) }
+          # This is not a real test
           it { is_expected.to respond_to :daemonize! }
         end
       end
 
       describe 'multi-process cluster daemon' do
         describe Cluster do
-          let(:url) { "unix://#{@tmp_path}" }
+          subject(:single) { ::Puma::Const::VERSION =~ /^5/ ? described_class.new(cli.launcher, cli.instance_variable_get(:@events)) : described_class.new(cli.launcher) }
+          let(:url) { "unix://#{@tmp_path1}" }
           let(:argv) do
             ['-b', "unix://#{@tmp_path2}",
              '-t', '2:2',
@@ -62,7 +58,7 @@ module Puma
              '--control-token', '',
              'spec/rackup/lobster.ru']
           end
-
+          # This is not a real test
           it { is_expected.to respond_to :daemonize! }
         end
       end

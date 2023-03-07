@@ -8,6 +8,10 @@ module Puma
       def puma_default_options
         super.merge({ daemon: true })
       end
+
+      def daemonize
+        super.merge({ daemon: true })
+      end
     end
   end
 end

@@ -24,3 +24,5 @@
 **/tmp/
 /tmp/*
 /tmp/pids/*
+/Gemfile
+

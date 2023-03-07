@@ -3,7 +3,9 @@
 require 'rspec'
 require 'rspec/its'
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start do
+  add_filter 'spec'
+end
 
 if ENV['CODECOV_TOKEN']
   require 'codecov'
