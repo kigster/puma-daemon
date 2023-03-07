@@ -1,5 +1,28 @@
 # Changelog
 
+## [v0.2.1](https://github.com/kigster/puma-daemon/tree/v0.2.1) (2023-03-07)
+
+[Full Changelog](https://github.com/kigster/puma-daemon/compare/v0.2.0...v0.2.1)
+
+**Fixed bugs:**
+
+- pumad doesn't work with puma v6 [\#10](https://github.com/kigster/puma-daemon/issues/10)
+- doesn't daemonize [\#9](https://github.com/kigster/puma-daemon/issues/9)
+- Log is not working [\#8](https://github.com/kigster/puma-daemon/issues/8)
+- Currently breaks in a single \(non-cluster\) mode [\#1](https://github.com/kigster/puma-daemon/issues/1)
+
+**Merged pull requests:**
+
+- Hopefully fixing demonization for Puma v5 and v6 [\#11](https://github.com/kigster/puma-daemon/pull/11) ([kigster](https://github.com/kigster))
+
+## [v0.2.0](https://github.com/kigster/puma-daemon/tree/v0.2.0) (2023-03-07)
+
+[Full Changelog](https://github.com/kigster/puma-daemon/compare/v0.1.2...v0.2.0)
+
+**Merged pull requests:**
+
+- Fix README spelling [\#7](https://github.com/kigster/puma-daemon/pull/7) ([lulalala](https://github.com/lulalala))
+
 ## [v0.1.2](https://github.com/kigster/puma-daemon/tree/v0.1.2) (2021-03-05)
 
 [Full Changelog](https://github.com/kigster/puma-daemon/compare/v0.1.1...v0.1.2)

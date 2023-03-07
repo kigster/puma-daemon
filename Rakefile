@@ -26,7 +26,7 @@ end
 task build: :permissions
 
 YARD::Rake::YardocTask.new(:doc) do |t|
-  t.files = %w[lib/**/*.rb exe/*.rb - README.adoc CHANGELOG.md LICENSE.txt]
+  t.files = %w[lib/**/*.rb exe/* - README.adoc CHANGELOG.md LICENSE.txt]
   t.options.unshift('--title', '"Puma Daemon"')
   t.after = -> { exec('open doc/index.html') }
 end
