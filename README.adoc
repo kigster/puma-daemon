@@ -22,16 +22,17 @@ One of the nice features of the old daemonization functionality was that it work
 
 So, if you want to use the latest and greatest Puma 5+, but have it self-daemonize, this gem is for you.
 
-== Compatility
+== Compatibility
 
-We did not restore the daemonization code for JRuby; so at the moment this will work with the MRI distribution,  and possibly others that support `Process.daemon(true)`.
+=== Ruby Versions
 
-We currently run CI suite on Github Actions against
+We did not restore the daemon functionality for JRuby; so at the moment this will work with the MRI distribution, and possibly others that support `Process.daemon(true, true)`.
 
- * MRI Ruby 3.0.0
- * MRI Ruby 2.7.2
- * MRI Ruby 2.6.6
- * MRI Ruby 2.5.7
+For supported MRI Ruby Versions see the https://github.com/kigster/puma-daemon/blob/master/.github/workflows/main.yml#L10[Github Workflow] file.
+
+=== Puma Versions
+
+Currently Puma versions 5 and 6 are supported.
 
 === Known Issues
 
@@ -64,11 +65,16 @@ And then execute:
 There were two ways you could daemonize Puma in the past:
 
  1. By specifying `daemonize` or `daemonize(true)` in your config file.
- 2. Or, by passing a `-d` or `--daemonize` command line flag.
+ 2. Or, by using the `pumad` executable (it passes all of its arguments to Puma's CLI class).
+ 3. Or, by passing a `-d` or `--daemonize` command line flag
 
 This gem allows you to daemonize using both ways, but with a small caveat in each case.
 
 Please note that both ways require you to include this gem in your Gemfile, but you may specify it as `require: false` — it will only activate if you explicitly require it, or use `pumad` executable.
+
+=== Examples
+
+Please see the https://github.com/kigster/puma-daemon/tree/master/examples[`examples`] directory in the source of the gem. It contains `single.sh` and `cluster.sh` scripts that boot Puma via `pumad` binary.
 
 === Daemonizing via the Config File
 
@@ -122,7 +128,7 @@ If you replace `puma` with `pumad`, you no longer need to pass any additional co
 ❯ gem install puma --version 5.1.1 -N
 ❯ gem install puma-daemon -N
 
-❯ pumad -C config/puma.rb spec/rackup/bind.ru
+❯ pumad -w 3 -C config/puma.rb spec/rackup/bind.ru
 
 [98795] Puma starting in cluster mode...
 [98795] * Puma version: 5.1.1 (ruby 2.7.2-p137) ("At Your Service")
