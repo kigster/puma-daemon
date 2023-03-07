@@ -27,7 +27,7 @@ So, if you want to use the latest and greatest Puma 5+, but have it self-daemoni
 
 === Ruby Versions
 
-We did not restore the daemon functionality for JRuby; so at the moment this will work with the MRI distribution, and possibly others that support `Process.daemon(true, true)`.
+We did not restore the daemon functionality for JRuby; so at the moment this will work with the MRI distribution, and possibly others that support https://ruby-doc.org/core-2.6.1/Process.html#method-c-daemon[`Process.daemon(true, true)`].
 
 For supported MRI Ruby Versions see the https://github.com/kigster/puma-daemon/blob/master/.github/workflows/main.yml#L10[Github Workflow] file.
 
@@ -54,24 +54,39 @@ Add this line to your application's Gemfile:
 [source,ruby]
 ----
 gem 'puma-daemon', require: false
-gem 'puma',  '~> 5'
+gem 'puma',  '~> 5' # or 6
+----
+
+In your `config/puma.rb`, eg.
+
+[source,ruby]
+----
+require 'puma/daemon'
+bind 'tcp://0.0.0.0:3000'
+workers 2
+threads 4
+daemonize
 ----
 
 And then execute:
 
  $ bundle install
+ $ bundle exec puma -C config/puma.rb
+
+Make sure you have `config.ru` Rackup file in the current folder. Checkout the shell script inside the `example` folder for more info.
 
 == Usage
 
 There were two ways you could daemonize Puma in the past:
 
  1. By specifying `daemonize` or `daemonize(true)` in your config file.
- 2. Or, by using the `pumad` executable (it passes all of its arguments to Puma's CLI class).
- 3. Or, by passing a `-d` or `--daemonize` command line flag
+ 2. By specifying `-d` or `--daemonize` on the command line.
 
-This gem allows you to daemonize using both ways, but with a small caveat in each case.
+Both of these ways are supported, as long as you do `require 'puma/daemon'` in your puma config file, and — in the case of `-d` flag, you pass it to `pumad` executable, not `puma`.
 
-Please note that both ways require you to include this gem in your Gemfile, but you may specify it as `require: false` — it will only activate if you explicitly require it, or use `pumad` executable.
+The recommended way to daemonize is via the provided `pumad` executable, or via the require in `puma.rb` and a subsequent call to `daemonize()` method.
+
+Please note that you must include `puma-daemon` in your Gemfile, but you may specify it as `require: false` — it will only activate if you explicitly require it in your Puma config file.
 
 === Examples
 
@@ -95,7 +110,7 @@ daemonize
 
 With this method you can continue using the standard `puma` executable to get it started, but (and this is important) — **you must remove any `-d` or `--daemonize` from the command line**, or Puma v5 and above will fail with an error.
 
-Here is an example of demonizing via the config file shown above, and using the regular `puma` binary:
+Here is an example of daemonizing via the config file shown above, and using the regular `puma` binary:
 
 [source,bash]
 ----
@@ -107,7 +122,7 @@ Here is an example of demonizing via the config file shown above, and using the 
 [62235] *  Max threads: 16
 [62235] *  Environment: development
 [62235] *   Master PID: 62235
-[62235] *  Puma Daemon: Demonizing...
+[62235] *  Puma Daemon: Daemonizing...
 [62235] *  Gem: puma-daemon v0.2.0
 [62235] *  Gem: puma v6.1.1
 [62258] *      Workers: 4
@@ -137,14 +152,14 @@ Puma starting in single mode...
 *  Max threads: 16
 *  Environment: development
 *          PID: 63179
-*  Puma Daemon: Demonizing...
+*  Puma Daemon: Daemonizing...
 *  Gem: puma-daemon v0.2.0
 *  Gem: puma v6.1.1
 * Listening on unix:///tmp/puma.sock
 * Listening on http://0.0.0.0:9292
 ----
 
-As you can see, at the end it says "Demonizing".
+As you can see, at the end it says "Daemonizing".
 
 If you start puma this way, you can still specify `daemonize(false)` in the configuration file to turn it off, but the default is to daemonize. Also, if you start with `pumad` you do not need to include `require 'puma/daemon'` in your configuration file, as the `pumad` binary loads all dependencies prior to parsing the config.
 
