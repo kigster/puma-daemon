@@ -41,11 +41,11 @@ Please see the list of open issues on the https://github.com/kigster/puma-daemon
 
 == Design Decisions
 
-This gem's goal was to surgically augment Puma's source code to restore daemonization by merely requiring `puma/daemon`. We almost got there, but not quite.
+This gem's goal was to surgically augment Puma's source code to restore daemonization by merely requiring `puma/daemon`.
 
-While this was an admirable goal, it has not been accomplished in the current version.  The internals of Puma isn't very easy to monkey-patch or augment. For example, we couldn't think of a way to add back the `-d` flags to the Option Parsing method without having to override the entire method: — which is _not a good solution_, because — what if Puma developers add a new flag in the future? We would have to keep this overridden method frequently updated and potentially choose a different version depending on what version of Puma you are using. That sounds like a nightmare.
+We accomplished this goal by adding the daemonization call to the routine `output_header()` which is invoked by both `Puma::Single` runner and the `Puma::Cluster` runner at the very beginning of the launch process. While relatively brittle, particularly if the future versions of Puma change this, this approach seems to work with the currently released version of Puma (5 and 6).
 
-It is why instead, we took an approach that requires you — the user — to make a couple of small changes in your Puma configuration to bring daemonization back, or in your scripts, change `puma` to `pumad`, and everything should work. If you run into problems, please https://github.com/kigster/puma-daemon/issues/new[submit an issue].
+If you run into problems, please https://github.com/kigster/puma-daemon/issues/new[submit an issue].
 
 == Installation
 
