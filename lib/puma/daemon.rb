@@ -3,6 +3,16 @@
 require 'puma'
 require 'puma/const'
 require 'puma/runner'
+require 'puma/single'
+require 'puma/cluster'
+require 'puma/dsl'
+require 'puma/cli'
+
+require 'puma/daemon/version'
+require 'puma/daemon/runner_adapter'
+require 'puma/daemon/configuration'
+require 'puma/daemon/cli'
+require 'puma/daemon/dsl'
 
 module Puma
   module Daemon
@@ -15,16 +25,5 @@ module Puma
     end
   end
 end
-
-require 'puma/single'
-require 'puma/cluster'
-require 'puma/dsl'
-require 'puma/cli'
-
-require 'puma/daemon/version'
-require 'puma/daemon/runner_adapter'
-require 'puma/daemon/configuration'
-require 'puma/daemon/cli'
-require 'puma/daemon/dsl'
 
 Puma::Daemon.daemonize!
