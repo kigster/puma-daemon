@@ -75,7 +75,7 @@ Please note that both ways require you to include this gem in your Gemfile, but 
 
 === Examples
 
-Please see the https://github.com/kigster/puma-daemon/tree/master/examples[`examples`] directory in the source of the gem. It contains `single.sh` and `cluster.sh` scripts that boot Puma via `pumad` binary.
+Please see the https://github.com/kigster/puma-daemon/tree/master/example[`example`] directory in the source of the gem. It contains `single.sh` and `cluster.sh` scripts that boot Puma via `pumad` binary.
 
 === Daemonizing via the Config File
 
