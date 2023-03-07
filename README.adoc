@@ -95,23 +95,25 @@ daemonize
 
 With this method you can continue using the standard `puma` executable to get it started, but (and this is important) — **you must remove any `-d` or `--daemonize` from the command line**, or Puma v5 and above will fail with an error.
 
-Here is an example of daemonizing via the config file shown above, and using the regular `puma` binary:
+Here is an example of demonizing via the config file shown above, and using the regular `puma` binary:
 
 [source,bash]
 ----
-❯ gem install puma-daemon puma -N
-❯ puma -C config/puma.rb config.ru
-
-[98795] Puma starting in cluster mode...
-[98795] * Puma version: 5.1.1 (ruby 2.7.2-p137) ("At Your Service")
-[98795] *  Min threads: 2
-[98795] *  Max threads: 3
-[98795] *  Environment: production
-[98795] *   Master PID: 98795
-[98795] *      Workers: 3
-[98795] *     Restarts: (✔) hot (✔) phased
-[98795] * Listening on http://0.0.0.0:3001
-[98795] *  Puma Daemon: Daemonizing (puma-daemon v0.1.1)...
+❯ cd example
+❯ bundle exec puma -I ../lib -C $(pwd)/puma.rb -w 4 config.ru
+[62235] Puma starting in cluster mode...
+[62235] * Puma version: 6.1.1 (ruby 2.7.6-p219) ("The Way Up")
+[62235] *  Min threads: 0
+[62235] *  Max threads: 16
+[62235] *  Environment: development
+[62235] *   Master PID: 62235
+[62235] *  Puma Daemon: Demonizing...
+[62235] *  Gem: puma-daemon v0.2.0
+[62235] *  Gem: puma v6.1.1
+[62258] *      Workers: 4
+[62258] *     Restarts: (✔) hot (✔) phased
+[62258] * Listening on unix:///tmp/puma.sock
+[62258] * Listening on http://0.0.0.0:9292
 ----
 
 Note that using this method you can decide whether to daemonize or not by passing true or false to the `daemonize` method.
@@ -126,27 +128,25 @@ If you replace `puma` with `pumad`, you no longer need to pass any additional co
 
 [source,bash]
 ----
-❯ gem install puma --version 5.1.1 -N
-❯ gem install puma-daemon -N
+❯ cd example
+❯ ../exe/pumad -C $(pwd)/puma.rb -w 0 config.ru
 
-❯ pumad -w 3 -C config/puma.rb spec/rackup/bind.ru
-
-[98795] Puma starting in cluster mode...
-[98795] * Puma version: 5.1.1 (ruby 2.7.2-p137) ("At Your Service")
-[98795] *  Min threads: 2
-[98795] *  Max threads: 8
-[98795] *  Environment: production
-[98795] *   Master PID: 98795
-[98795] *      Workers: 3
-[98795] *     Restarts: (✔) hot (✔) phased
-[98795] * Listening on http://0.0.0.0:3000
-[98795] *  Puma Daemon: Daemonizing (puma-daemon v0.1.1)...
+Puma starting in single mode...
+* Puma version: 6.1.1 (ruby 2.7.6-p219) ("The Way Up")
+*  Min threads: 0
+*  Max threads: 16
+*  Environment: development
+*          PID: 63179
+*  Puma Daemon: Demonizing...
+*  Gem: puma-daemon v0.2.0
+*  Gem: puma v6.1.1
+* Listening on unix:///tmp/puma.sock
+* Listening on http://0.0.0.0:9292
 ----
 
-As you can see, at the end it says "Daemonizing".
+As you can see, at the end it says "Demonizing".
 
 If you start puma this way, you can still specify `daemonize(false)` in the configuration file to turn it off, but the default is to daemonize. Also, if you start with `pumad` you do not need to include `require 'puma/daemon'` in your configuration file, as the `pumad` binary loads all dependencies prior to parsing the config.
-
 
 == Development
 
