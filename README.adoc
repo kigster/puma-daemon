@@ -7,6 +7,7 @@
 image:https://github.com/kigster/puma-daemon/workflows/Ruby/badge.svg[link=https://github.com/kigster/puma-daemon/actions?query=workflow%3ARuby] 
 image:https://codecov.io/gh/kigster/puma-daemon/branch/master/graph/badge.svg?token=asxarMSGbz[link=https://codecov.io/gh/kigster/puma-daemon]
 image:https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkigster%2Fpuma-daemon.svg?type=shield[link=https://app.fossa.com/projects/git%2Bgithub.com%2Fkigster%2Fpuma-daemon?ref=badge_shield]
+image:https://badge.fury.io/rb/puma-daemon.svg["Gem Version", link="https://badge.fury.io/rb/puma-daemon"]
 
 image:https://codecov.io/gh/kigster/puma-daemon/commit/9ebd665764786a9815b159b699087148e19e671a/graphs/sunburst.svg[sunbirst]
 
