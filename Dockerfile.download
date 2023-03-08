@@ -13,7 +13,7 @@
 #    $ bundle exec rspec
 #    $ bundle exec puma -C config/puma.rb spec/fixtures/lobster.ru
 #    
-FROM ruby:3.0.0
+FROM ruby:3.1
 
 RUN apt-get update -y && \
     apt-get install -yqq \
