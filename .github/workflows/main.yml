@@ -24,8 +24,8 @@ jobs:
     - name: Run Specs
       run: make test-all
 
-    - name: Upload Code Coverage
-      run: bash <(curl -s https://codecov.io/bash)
+    - name: Rubocop
+      run: bundle exec rubocop
 
     - uses: codecov/codecov-action@v3
       with:

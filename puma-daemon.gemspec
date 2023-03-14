@@ -50,6 +50,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'asciidoctor'
   spec.add_development_dependency 'codecov'
+  spec.add_development_dependency 'httparty'
   spec.add_development_dependency 'relaxed-rubocop'
   spec.add_development_dependency 'rspec-its'
   spec.add_development_dependency 'rubocop'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'puma/daemon'
 
 # The directory to operate out of.
@@ -34,7 +36,7 @@ bind 'tcp://0.0.0.0:9292'
 # Instead of “bind 'ssl://127.0.0.1:9292?key=path_to_key&cert=path_to_cert'” you
 # can also use the “ssl_bind” option.
 
- # ssl_bind '127.0.0.1', '9292', { key: path_to_key, cert: path_to_cert }
+# ssl_bind '127.0.0.1', '9292', { key: path_to_key, cert: path_to_cert }
 
 # Code to run before doing a restart. This code should
 # close log files, database connections, etc.
@@ -71,6 +73,6 @@ workers 2
 # Check out https://github.com/puma/puma/blob/master/lib/puma/app/status.rb
 # to see what the app has available.
 
-#activate_control_app 'unix:///var/run/pumactl.sock'
+# activate_control_app 'unix:///var/run/pumactl.sock'
 
 daemonize

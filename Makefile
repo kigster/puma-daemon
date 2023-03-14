@@ -45,6 +45,9 @@ docker-build-run: 		docker-build-ruby ## Drops you into a BASH session on ubuntu
 docker-download-run: 		docker-download-ruby ## Drops you into a BASH session on ubuntu with ruby 3.0.0
 				@docker run -it puma-daemon:latest
 
+generate-pdf:			## Regenerates README,pdf from README.adoc
+				@bash -c "[[ -d ~/.bashmatic ]] || git clone https://github.com/kigster/bashmatic ~/.bashmatic"
+				@bash -c "source ~/.bashmatic/init.sh && ~/.bashmatic/bin/adoc2pdf README.adoc"
 
 clean:				## Clean-up
 				@rm -rf Gemfile Gemfile.lock coverage 

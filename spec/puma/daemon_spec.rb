@@ -35,7 +35,6 @@ module Puma
     let(:cli) { ::Puma::Daemon::CLI.new(argv).cli }
 
     context 'runners' do
-
       describe 'single-process daemon' do
         let(:argv) { [] }
 
