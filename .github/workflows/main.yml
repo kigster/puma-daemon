@@ -9,14 +9,32 @@ jobs:
       matrix:
         ruby-version: [3.2.0, 3.1.3, 3.0.5, 2.7.2, 2.6.6, 2.5.7]
 
+    env:
+      RUBY_VERSION: ${{ matrix.ruby-version }}
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up Ruby ${{ matrix.ruby-version }}
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby-version }}
+
     - name: Run Specs
       run: make test-all
+
     - name: Upload Code Coverage
       run: bash <(curl -s https://codecov.io/bash)
+
+    - uses: codecov/codecov-action@v3
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
+        directory: coverage
+        env_vars: RUBY_VERSION
+        files: codecov-result.json
+        flags: unittests # optional
+        name: codecov-umbrella # optional
+        fail_ci_if_error: true # optional (default = false)
+        verbose: true # optional (default = false)
 
