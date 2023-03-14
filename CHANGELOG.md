@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.3.0](https://github.com/kigster/puma-daemon/tree/v0.3.0) (2023-03-14)
+
+[Full Changelog](https://github.com/kigster/puma-daemon/compare/v0.2.3...v0.3.0)
+
 ## [v0.2.3](https://github.com/kigster/puma-daemon/tree/v0.2.3) (2023-03-14)
 
 [Full Changelog](https://github.com/kigster/puma-daemon/compare/v0.2.2...v0.2.3)
