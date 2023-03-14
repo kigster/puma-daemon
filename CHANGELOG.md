@@ -1,5 +1,19 @@
 # Changelog
 
+## [v0.2.3](https://github.com/kigster/puma-daemon/tree/v0.2.3) (2023-03-14)
+
+[Full Changelog](https://github.com/kigster/puma-daemon/compare/v0.2.2...v0.2.3)
+
+**Merged pull requests:**
+
+- Attempting to properly track code coverage after fork\(\) [\#15](https://github.com/kigster/puma-daemon/pull/15) ([kigster](https://github.com/kigster))
+- Adding a proper codecov and updating READFME [\#14](https://github.com/kigster/puma-daemon/pull/14) ([kigster](https://github.com/kigster))
+- \[Snyk\] Security upgrade ruby from 3.0.0 to 3.1 [\#12](https://github.com/kigster/puma-daemon/pull/12) ([snyk-bot](https://github.com/snyk-bot))
+
+## [v0.2.2](https://github.com/kigster/puma-daemon/tree/v0.2.2) (2023-03-07)
+
+[Full Changelog](https://github.com/kigster/puma-daemon/compare/v0.2.1...v0.2.2)
+
 ## [v0.2.1](https://github.com/kigster/puma-daemon/tree/v0.2.1) (2023-03-07)
 
 [Full Changelog](https://github.com/kigster/puma-daemon/compare/v0.2.0...v0.2.1)
