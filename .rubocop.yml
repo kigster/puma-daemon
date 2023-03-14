@@ -23,3 +23,6 @@ Layout/LineLength:
 Naming/FileName:
   Exclude:
     - 'lib/puma-daemon.rb'
+
+# Gemspec/DevelopmentDependencies:
+#   Enabled: false

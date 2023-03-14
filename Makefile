@@ -32,6 +32,11 @@ test-all:			## Test all supported Puma Versions
 				make test
 				make puma-v6
 				make test
+
+rubocop:			## Run rubocop
+				@bundle check || bundle install
+				@bundle exec rubocop --format=progress
+
 				
 docker-build-ruby:		## Builds the Docker image by compiling ruby 3.0.0
 				@docker build -f Dockerfile.build    -t puma-daemon:latest .
