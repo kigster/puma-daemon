@@ -11,7 +11,6 @@ module RSpec
     SIGNAL_LIST = Signal.list.keys.map(&:to_sym) - (::Puma.windows? ? [:INT, :TERM] : [])
 
     class << self
-
       def skip_fork
         skip NO_FORK_MESSAGE unless HAS_FORK
       end

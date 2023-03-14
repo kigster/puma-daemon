@@ -9,8 +9,6 @@ if ENV['CODECOV_TOKEN']
   SimpleCov.formatter = SimpleCov::Formatter::Codecov
 end
 
-$pid = Process.pid
-
 SimpleCov.enable_for_subprocesses true
 SimpleCov.use_merging true
 SimpleCov.merge_timeout(4000)
@@ -48,4 +46,3 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 end
-

@@ -50,12 +50,12 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'asciidoctor'
   spec.add_development_dependency 'codecov'
+  spec.add_development_dependency 'httparty'
   spec.add_development_dependency 'relaxed-rubocop'
   spec.add_development_dependency 'rspec-its'
   spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'yard'
-  spec.add_development_dependency 'httparty'
 
   # Uncomment to register a new dependency of your gem
   # spec.add_dependency "example-gem", "~> 1.0"
