@@ -25,4 +25,4 @@
 /tmp/*
 /tmp/pids/*
 /Gemfile
-
+**/.DS_Store
