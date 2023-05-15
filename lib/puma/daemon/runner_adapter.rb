@@ -35,9 +35,11 @@ module Puma
             end
 
             def log(str)
-              if super.respond_to?(:log)
-                super(str) unless str == 'Use Ctrl-C to stop'
-              else
+              return if str == 'Use Ctrl-C to stop'
+
+              begin
+                super(str)
+              rescue StandardError
                 puts(str)
               end
             end
