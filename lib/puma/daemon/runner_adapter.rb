@@ -35,7 +35,7 @@ module Puma
             end
 
             def log(str)
-              return if str == 'Use Ctrl-C to stop'
+              return if str =~ /Ctrl-C/
 
               begin
                 super(str)
