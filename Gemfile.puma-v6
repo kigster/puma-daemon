@@ -6,8 +6,8 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'puma', '~> 6.0'
-gem 'rake', '~> 13.0'
 gem 'rack', '~> 2'
+gem 'rake', '~> 13.0'
 
 group :test do
   gem 'codecov', require: false
