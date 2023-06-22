@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require 'puma/daemon/version'
 
 module Puma
   RSpec.describe Daemon do
