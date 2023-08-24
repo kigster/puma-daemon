@@ -4,27 +4,31 @@
 :sectnums:
 :icons: font
 
+
 [cols="2,7",width="100%",align="center",options="header"]
 |===
 
 |Badge
 |Type
 
+|Sponsor!
+|image:https://img.shields.io/liberapay/goal/kigster.svg?logo=liberapay[link=https://liberapay.com/kigster/donate,height="30"]
+
 |Test Suite
-|image:https://github.com/kigster/puma-daemon/workflows/Ruby/badge.svg[link=https://github.com/kigster/puma-daemon/actions?query=workflow%3ARuby,width="150"]
+|image:https://github.com/kigster/puma-daemon/workflows/Ruby/badge.svg[link=https://github.com/kigster/puma-daemon/actions?query=workflow%3ARuby,height="30"]
 
 
 |Licensing
-|image:https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkigster%2Fpuma-daemon.svg?type=shield[link=https://app.fossa.com/projects/git%2Bgithub.com%2Fkigster%2Fpuma-daemon?ref=badge_shield,width="190"]
+|image:https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkigster%2Fpuma-daemon.svg?type=shield[link=https://app.fossa.com/projects/git%2Bgithub.com%2Fkigster%2Fpuma-daemon?ref=badge_shield,height="30"]
 
 |Gem Version
-|image:https://badge.fury.io/rb/puma-daemon.svg["Gem Version",link="https://badge.fury.io/rb/puma-daemon",width="220s"]
+|image:https://badge.fury.io/rb/puma-daemon.svg["Gem Version",link="https://badge.fury.io/rb/puma-daemon",height="30"]
 
 |Test Coverage
-|image:https://codecov.io/gh/kigster/puma-daemon/branch/master/graph/badge.svg?token=asxarMSGbz[link=https://codecov.io/gh/kigster/puma-daemon,width="220"]
+|image:https://codecov.io/gh/kigster/puma-daemon/branch/master/graph/badge.svg?token=asxarMSGbz[link=https://codecov.io/gh/kigster/puma-daemon,height="30"]
 
 |Coverage Areas
-|image:https://codecov.io/gh/kigster/puma-daemon/branch/master/graphs/sunburst.svg?token=asxarMSGbz[sunbirst,width="30%",link=https://codecov.io/gh/kigster/puma-daemon,float=left] image:https://codecov.io/gh/kigster/puma-daemon/branch/master/graphs/icicle.svg?token=asxarMSGbz[coverage-graph,width="60%",link=https://codecov.io/gh/kigster/puma-daemon,float=right]
+|image:https://codecov.io/gh/kigster/puma-daemon/branch/master/graphs/sunburst.svg?token=asxarMSGbz[sunbirst,width="30%",link=https://codecov.io/gh/kigster/puma-daemon,float=left] image:https://codecov.io/gh/kigster/puma-daemon/branch/master/graphs/icicle.svg?token=asxarMSGbz[coverage-graph,,height="30",link=https://codecov.io/gh/kigster/puma-daemon,float=right]
 
 |===
 
