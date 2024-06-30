@@ -1,6 +1,6 @@
 name: Ruby
 
-on: [push,pull_request]
+on: [pull_request, workflow_dispatch]
 
 jobs:
   build:
@@ -20,7 +20,7 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby-version }}
-        bundler-cache: true # runs 'bun          
+        bundler-cache: true # runs 'bun
 
     - name: Run Specs
       run: make test-all
@@ -28,10 +28,17 @@ jobs:
     - name: Rubocop
       run: bundle exec rubocop --parallel
 
-    - uses: codecov/codecov-action@v4
-      with:
-        fail_ci_if_error: false # optional (default = false)
-        files: coverage/coverage.xml
-        flags: rspecs # optional
-        token: ${{ secrets.CODECOV_TOKEN }} # required
-        verbose: true # optional (default = false)`
+    - name: Upload to Codecov
+      run: |
+        if [[ $(ruby -e 'puts RUBY_VERSION') == '3.3.1' ]]; then
+          curl -Os https://uploader.codecov.io/latest/linux/codecov
+          chmod +x codecov
+          ./codecov
+        fi
+
+#    - uses: codecov/codecov-action@v4
+#      with:
+#        fail_ci_if_error: false # optional (default = false)
+#        flags: rspecs # optional
+#        token: ${{ secrets.CODECOV_TOKEN }} # required
+#        verbose: true # optional (default = false)`
