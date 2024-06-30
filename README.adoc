@@ -28,7 +28,7 @@
 |image:https://codecov.io/gh/kigster/puma-daemon/branch/master/graph/badge.svg?token=asxarMSGbz[link=https://codecov.io/gh/kigster/puma-daemon,height="30"]
 
 |Coverage Areas
-|image:https://codecov.io/gh/kigster/puma-daemon/branch/master/graphs/sunburst.svg?token=asxarMSGbz[sunbirst,width="30%",link=https://codecov.io/gh/kigster/puma-daemon,float=left] image:https://codecov.io/gh/kigster/puma-daemon/branch/master/graphs/icicle.svg?token=asxarMSGbz[coverage-graph,,height="30",link=https://codecov.io/gh/kigster/puma-daemon,float=right]
+|image:https://codecov.io/gh/kigster/puma-daemon/branch/master/graphs/icicle.svg?token=asxarMSGbz[coverage-graph,,height="30",link=https://codecov.io/gh/kigster/puma-daemon,float=left]
 
 |===
 

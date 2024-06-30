@@ -12,6 +12,9 @@ OS	 		 	:= $(shell uname -s | tr '[:upper:]' '[:lower:]')
 MAKEFILE_PATH 			:= $(abspath $(lastword $(MAKEFILE_LIST)))
 CURRENT_DIR 			:= $(notdir $(patsubst %/,%,$(dir $(MAKEFILE_PATH))))
 PUMAD_HOME			:= $(shell dirname $(MAKEFILE_PATH))
+VERSION 			:= $(shell bundle exec ruby -I lib -r puma-daemon.rb -e 'puts Puma::Daemon::VERSION')
+TAG 				:= $(shell echo "v$(VERSION)")
+BRANCH          		:= $(shell git branch --show)
 
 help:	   			## Prints help message auto-generated from the comments.
 				@grep -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -56,4 +59,8 @@ generate-pdf:			## Regenerates README,pdf from README.adoc
 
 clean:				## Clean-up
 				@rm -rf Gemfile Gemfile.lock coverage
+
+tag:        			## Tag with the latest .version
+				@/usr/bin/env bash -c "git tag | grep -q '$(TAG)' && { echo 'Tag $(TAG) is already assigned.'; exit 1; } || true"
+				@/usr/bin/env bash -c "if [[ $(BRANCH) != master ]]; then echo 'Must be on the main branch'; else git tag -f '$(TAG)'; git push --tags --force; fi"
 
