@@ -11,10 +11,10 @@ Gem::Specification.new do |spec|
   spec.summary       = "Restore somewhat Puma's ability to self-daemonize, since Puma 5.0 dropped it"
   spec.description   = <<~DESCRIPTION
 
-    In version 5.0 the authors of the popular Ruby web server Puma chose to remove the 
+    In version 5.0 the authors of the popular Ruby web server Puma chose to remove the#{' '}
     daemonization support from Puma, because the code wasn't wall maintained,
     and because other and better options exist for production deployments. For example
-    systemd, Docker/Kubernetes, Heroku, etc. 
+    systemd, Docker/Kubernetes, Heroku, etc.#{' '}
 
     Having said that, it was neat and often useful to daemonize Puma in development.
     This gem adds this support to Puma 5 & 6 (hopefully) without breaking anything in Puma
@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'https://github.com/kigster/puma-daemon'
   spec.license       = 'MIT'
 
-  spec.required_ruby_version = Gem::Requirement.new('>= 2.4.0')
+  spec.required_ruby_version = Gem::Requirement.new('>= 2.6')
 
   spec.metadata['homepage_uri'] = spec.homepage
   spec.metadata['source_code_uri'] = 'https://github.com/kigster/puma-daemon'
@@ -45,15 +45,6 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'puma', '>= 5.0'
   spec.add_dependency 'rack'
-
-  spec.add_development_dependency 'asciidoctor'
-  spec.add_development_dependency 'codecov'
-  spec.add_development_dependency 'httparty'
-  spec.add_development_dependency 'relaxed-rubocop'
-  spec.add_development_dependency 'rspec-its'
-  spec.add_development_dependency 'rubocop'
-  spec.add_development_dependency 'simplecov'
-  spec.add_development_dependency 'yard'
 
   # For more information and examples about making a new gem, checkout our
   # guide at: https://bundler.io/guides/creating_gem.html

@@ -26,7 +26,7 @@ module Puma
 
         Thread.join
 
-        expect(response).to_not be_nil
+        expect(response).not_to be_nil
 
         expect(response.code).to eq(200)
         expect(response.body).to eq('Hello World')
@@ -51,8 +51,8 @@ module Puma
       @port1 = 61_234
       @port2 = 61_235
 
-      File.unlink @tmp_path1 if File.exist? @tmp_path1
-      File.unlink @tmp_path2 if File.exist? @tmp_path2
+      FileUtils.rm_f @tmp_path1
+      FileUtils.rm_f @tmp_path2
 
       @wait, @ready = IO.pipe
     end
@@ -62,9 +62,9 @@ module Puma
       @ready&.close
     end
 
-    context 'runners' do
+    describe 'runner' do
       describe 'single-process daemon' do
-        describe Single do
+        describe 'Puma::Single' do
           let(:argv) { %W[-b tcp://0.0.0.0:#{@port1} spec/rackup/bind.ru] }
           let(:cli) { ::Puma::Daemon::CLI.new(argv).cli }
           let(:runner) { runner_instance(cli) }
@@ -72,11 +72,8 @@ module Puma
 
           before { ::RSpec::PumaHelpers.puma_kill[] }
 
-          it 'should have puma running on the background' do
+          it 'has puma running on the background' do
             start_server_and_verify!(port, cli)
-          end
-
-          after do
             expect(::RSpec::PumaHelpers.puma_pids[]).to be_empty
           end
         end
@@ -89,11 +86,8 @@ module Puma
 
           before { ::RSpec::PumaHelpers.puma_kill[] }
 
-          it 'should have puma running on the background' do
+          it 'has puma running on the background' do
             start_server_and_verify!(port, cli)
-          end
-
-          after do
             expect(::RSpec::PumaHelpers.puma_pids[]).to be_empty
           end
         end

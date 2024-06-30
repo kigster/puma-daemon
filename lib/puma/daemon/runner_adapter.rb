@@ -4,6 +4,7 @@ require_relative 'version'
 
 module Puma
   module Daemon
+    # noinspection RubySuperCallWithoutSuperclassInspection
     module RunnerAdapter
       class << self
         def included(base)
@@ -14,7 +15,7 @@ module Puma
 
           base.class_eval do
             def output_header(mode)
-              super(mode)
+              super
 
               daemonize! if daemon?
             end
@@ -35,10 +36,10 @@ module Puma
             end
 
             def log(str)
-              return if str =~ /Ctrl-C/
+              return if str.include?('Ctrl-C')
 
               begin
-                super(str)
+                super
               rescue StandardError
                 puts(str)
               end

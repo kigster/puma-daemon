@@ -1,4 +1,34 @@
-comment: 
-  layout: "reach,diff,flags,tree,betaprofiling"
-  show_critical_paths: true
+codecov:
+  ci:
+    - "github.com"
+  max_report_age: 24
+  disable_default_path_fixes: no
+  require_ci_to_pass: yes
+  notify:
+    after_n_builds: 1
+    wait_for_ci: yes
+
+github_checks:
+  annotations: true
+
+coverage:
+  range: 50..75
+  round: down
+  precision: 2
+  status:
+    patch: false
+    project:
+      puma-daemon: # This can be anything, but it needs to exist as the name
+        # basic settings
+        target: 80%
+        threshold: 5%
+        base: auto 
+        if_ci_failed: ignore #success, failure, error, ignore
+        only_pulls: false
+        flags: 
+          - rspecs
+        paths: 
+          - lib
+        informational: true
+        removed_code_behavior: off 
 

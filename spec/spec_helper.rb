@@ -2,16 +2,10 @@
 
 require 'rspec'
 require 'rspec/its'
+require 'tempfile'
+
 require 'simplecov'
-
-if ENV['CODECOV_TOKEN']
-  require 'codecov'
-  SimpleCov.formatter = SimpleCov::Formatter::Codecov
-end
-
-SimpleCov.enable_for_subprocesses true
-SimpleCov.use_merging true
-SimpleCov.merge_timeout(4000)
+require 'simplecov-cobertura'
 
 SimpleCov.at_fork do |pid|
   # This needs a unique name so it won't be overwritten
@@ -22,7 +16,8 @@ SimpleCov.at_fork do |pid|
   # start
   SimpleCov.formatter SimpleCov::Formatter::MultiFormatter.new([
                                                                  SimpleCov::Formatter::SimpleFormatter,
-                                                                 SimpleCov::Formatter::HTMLFormatter
+                                                                 SimpleCov::Formatter::HTMLFormatter,
+                                                                 SimpleCov::Formatter::CoberturaFormatter
                                                                ])
   SimpleCov.start
   SimpleCov.track_files 'lib/**/*.rb'
