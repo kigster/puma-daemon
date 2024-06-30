@@ -64,3 +64,5 @@ tag:        			## Tag with the latest .version
 				@/usr/bin/env bash -c "git tag | grep -q '$(TAG)' && { echo 'Tag $(TAG) is already assigned.'; exit 1; } || true"
 				@/usr/bin/env bash -c "if [[ $(BRANCH) != master ]]; then echo 'Must be on the main branch'; else git tag -f '$(TAG)'; git push --tags --force; fi"
 
+tag-update:        		## Re-tag latest codebase with the existing version
+				@/usr/bin/env bash -c "if [[ $(BRANCH) != master ]]; then echo 'Must be on the main branch'; else git tag -f '$(TAG)'; git push --tags --force; fi"
