@@ -9,8 +9,21 @@ gem 'puma', '~> 6.0'
 gem 'rack', '~> 2'
 gem 'rake', '~> 13.0'
 
+group :development, :test do
+  gem 'asciidoctor'
+  gem 'yard'
+end
+
 group :test do
   gem 'codecov', require: false
+  gem 'httparty'
+  gem 'relaxed-rubocop'
   gem 'rspec', '~> 3.0'
-  gem 'rubocop', '~> 0.80'
+  gem 'rspec-its'
+  gem 'rubocop'
+  gem 'rubocop-performance'
+  gem 'rubocop-rake'
+  gem 'rubocop-rspec'
+  gem 'simplecov'
+  gem 'simplecov-cobertura', require: false
 end

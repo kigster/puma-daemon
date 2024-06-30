@@ -14,28 +14,34 @@ module Puma
         end
       end
 
-      it(:puma_default_options) { should_not be_nil }
+      it(:puma_default_options) { is_expected.not_to be_nil }
 
-      context 'default_dsl' do
+      describe '#default_dsl' do
         subject { config.default_dsl.options }
-        its([:daemon]) { should be true }
+
+        its([:daemon]) { is_expected.to be true }
       end
 
-      context 'user_dsl' do
-        subject { config.user_dsl.options }
-        its([:daemon]) { should be true }
-        its([:binds]) { should eq ['tcp://0.0.0.0:3001'] }
-      end
-
-      describe 'config: daemonize(false)' do
-        let(:daemonize) { false }
-        context 'user_dsl' do
+      describe '#user_dsl' do
+        describe 'when using default options' do
           subject { config.user_dsl.options }
-          its([:daemon]) { should be false }
+
+          its([:daemon]) { is_expected.to be true }
+          its([:binds]) { is_expected.to eq ['tcp://0.0.0.0:3001'] }
+        end
+
+        describe 'when daemonize is false)' do
+          subject { config.user_dsl.options }
+
+          let(:daemonize) { false }
+
+          its([:daemon]) { is_expected.to be false }
         end
       end
 
-      context 'file_dsl' do
+      describe 'file_dsl' do
+        subject { config.options }
+
         let(:config) do
           ::Puma::Configuration.new do |c|
             c.rackup 'spec/rackup/bind.ru'
@@ -43,10 +49,23 @@ module Puma
           end.tap(&:load)
         end
 
+        its([:binds]) { is_expected.to eq ['tcp://0.0.0.0:3000'] }
+        its([:daemon]) { is_expected.to be true }
+      end
+
+      describe 'pidfile' do
         subject { config.options }
 
-        its([:binds]) { should eq ['tcp://0.0.0.0:3000'] }
-        its([:daemon]) { should be true }
+        let(:pidfile) { Tempfile.new('pidfile') }
+        let(:config) do
+          ::Puma::Configuration.new do |c|
+            c.pidfile(pidfile)
+            c.port 3000
+          end.tap(&:load)
+        end
+
+        its([:binds]) { is_expected.to eq ['tcp://0.0.0.0:3000'] }
+        its([:daemon]) { is_expected.to be true }
       end
     end
   end

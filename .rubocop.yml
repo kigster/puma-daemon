@@ -1,9 +1,15 @@
+require:
+  - rubocop-performance
+  - rubocop-rake
+  - rubocop-rspec
+
 inherit_gem:
   relaxed-rubocop: .rubocop.yml
 
 AllCops:
-  TargetRubyVersion: 2.4
   NewCops: enable
+  SuggestExtensions: true
+  TargetRubyVersion: 2.6
 
 Style/OptionalBooleanParameter:
   Exclude:
@@ -23,6 +29,13 @@ Layout/LineLength:
 Naming/FileName:
   Exclude:
     - 'lib/puma-daemon.rb'
+
+Rake/Desc:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Max: 20
+
 
 # Gemspec/DevelopmentDependencies:
 #   Enabled: false

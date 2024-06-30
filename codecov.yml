@@ -1,4 +1,20 @@
 comment: 
   layout: "reach,diff,flags,tree,betaprofiling"
   show_critical_paths: true
+coverage:
+  status:
+    project:
+      default: # This can be anything, but it needs to exist as the name
+        # basic settings
+        target: auto
+        threshold: 5%
+        base: auto 
+        if_ci_failed: error #success, failure, error, ignore
+        only_pulls: false
+        flags: 
+          - rspecs
+        paths: 
+          - lib
+        informational: true
+        removed_code_behavior: off 
 

@@ -17,7 +17,7 @@ module Puma
 
       before {
         adapter.has_demonized = false
-        expect(::Process).to receive(:daemon)
+        allow(::Process).to receive(:daemon)
       }
 
       its(:daemonize!) { is_expected.to be_truthy }
