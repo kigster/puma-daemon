@@ -12,7 +12,6 @@
 **/.bundle
 /.bundle/
 /.yardoc
-/Gemfile.lock
 /_yardoc/
 **/config/master.key
 /coverage/
