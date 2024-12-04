@@ -40,7 +40,9 @@ jobs:
         bundle install -j 4 && bundle exec rspec --color --format progress -p 2 2>/dev/null
 
     - name: Rubocop
-      run: bundle exec rubocop --parallel || true
+      run: |
+        export BUNDLE_GEMFILE=Gemfile.puma-v6; \
+        bundle exec rubocop --parallel --format progress
 
     - name: Upload to Codecov
       run: |
