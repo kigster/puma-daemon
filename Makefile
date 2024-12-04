@@ -20,15 +20,17 @@ help:	   			## Prints help message auto-generated from the comments.
 				@grep -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
 puma-v5: 			## Installs puma 5.0.0
+				@echo "——————> Building for Puma v5 <—————————"
 				@ln -nfs Gemfile.puma-v5 Gemfile
 				@bundle install
 
 puma-v6: 			## Installs puma 5.0.0
+				@echo "——————> Building for Puma v6 <—————————"
 				@ln -nfs Gemfile.puma-v6 Gemfile
 				@bundle install
 
 test:				## Runs the test suite
-				@bundle exec rspec
+				@bundle exec rspec --color --format progress
 
 test-all:			## Test all supported Puma Versions
 				make puma-v5
@@ -38,7 +40,7 @@ test-all:			## Test all supported Puma Versions
 
 rubocop:			## Run rubocop
 				@bundle check || bundle install
-				@bundle exec rubocop --format=progress
+				@bundle exec rubocop --format=progress --color --parallel
 
 
 docker-build-ruby:		## Builds the Docker image by compiling ruby 3.0.0
