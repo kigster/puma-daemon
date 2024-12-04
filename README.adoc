@@ -17,16 +17,16 @@
 |image:https://github.com/kigster/puma-daemon/actions/workflows/main.yml/badge.svg[link=https://github.com/kigster/puma-daemon/actions?query=workflow%3ARuby,width="250"]
 
 |Licensing
-|image:https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkigster%2Fpuma-daemon.svg?type=shield[link=https://app.fossa.com/projects/git%2Bgithub.com%2Fkigster%2Fpuma-daemon?ref=badge_shield,width="250",height="150"]
+|image:https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkigster%2Fpuma-daemon.svg?type=shield[link=https://app.fossa.com/projects/git%2Bgithub.com%2Fkigster%2Fpuma-daemon?ref=badge_shield,width="250"]
 
 |Gem Version
-|image:https://badge.fury.io/rb/puma-daemon.svg["Gem Version",link="https://badge.fury.io/rb/puma-daemon",width="250",height="150"]
+|image:https://badge.fury.io/rb/puma-daemon.svg["Gem Version",link="https://badge.fury.io/rb/puma-daemon",width="250"]
 
 |Test Coverage
-|image:https://codecov.io/gh/kigster/puma-daemon/branch/master/graph/badge.svg?token=asxarMSGbz[link=https://codecov.io/gh/kigster/puma-daemon,width="250",height="150"]
+|image:https://codecov.io/gh/kigster/puma-daemon/branch/master/graph/badge.svg?token=asxarMSGbz[link=https://codecov.io/gh/kigster/puma-daemon,width="250"]
 
 |Coverage Areas
-|image:https://codecov.io/gh/kigster/puma-daemon/graphs/sunburst.svg?token=asxarMSGbz[coverage-graph,width="200",link=https://codecov.io/gh/kigster/puma-daemon]
+|image:https://codecov.io/gh/kigster/puma-daemon/graphs/sunburst.svg?token=asxarMSGbz[coverage-graph,width="250",link=https://codecov.io/gh/kigster/puma-daemon]
 
 |===
 
