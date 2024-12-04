@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
+# vim: ft=ruby
+
 source 'https://rubygems.org'
 
 # Specify your gem's dependencies in puma-daemon.gemspec
 gemspec
 
-gem 'puma', '~> 6.0'
+gem 'puma', '~> 6'
 gem 'rack', '~> 2'
 gem 'rake', '~> 13.0'
 
@@ -16,7 +18,7 @@ end
 
 group :test do
   gem 'codecov', require: false
-  gem 'httparty'
+  gem 'httparty', '~> 0.22'
   gem 'relaxed-rubocop'
   gem 'rspec', '~> 3.0'
   gem 'rspec-its'

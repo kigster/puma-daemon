@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# vim: ft=ruby
+
 require 'rspec'
 require 'rspec/its'
 require 'tempfile'
@@ -31,13 +33,34 @@ SimpleCov.start do
 end
 
 require_relative 'support/puma_helpers'
+require 'puma/daemon/version'
 require 'puma/daemon'
+require 'stringio'
 
 RSpec.configure do |config|
+  output = StringIO.new
+
+  config.before do
+    $stdout = output
+  end
+
+  config.after do
+    $stdout = STDOUT
+  end
+
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = '.rspec_status'
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+
+  config.before :suite do
+    puts "Testing Puma Daemon v#{Puma::Daemon::VERSION} for Puma v#{Puma::Server::VERSION}"
+  end
+
+  config.after :suite do
+    puts
+    puts output.string
   end
 end

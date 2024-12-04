@@ -1,0 +1,117 @@
+PATH
+  remote: .
+  specs:
+    puma-daemon (0.5.0)
+      puma (>= 5.0)
+      rack
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    asciidoctor (2.0.23)
+    ast (2.4.2)
+    bigdecimal (3.1.8)
+    codecov (0.2.12)
+      json
+      simplecov
+    csv (3.3.0)
+    diff-lcs (1.5.1)
+    docile (1.4.1)
+    httparty (0.22.0)
+      csv
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
+    json (2.8.2)
+    language_server-protocol (3.17.0.3)
+    mini_mime (1.1.5)
+    multi_xml (0.7.1)
+      bigdecimal (~> 3.1)
+    nio4r (2.7.4)
+    parallel (1.26.3)
+    parser (3.3.6.0)
+      ast (~> 2.4.1)
+      racc
+    puma (5.6.9)
+      nio4r (~> 2.0)
+    racc (1.8.1)
+    rack (2.2.10)
+    rainbow (3.1.1)
+    rake (13.2.1)
+    regexp_parser (2.9.3)
+    relaxed-rubocop (2.5)
+    rexml (3.3.9)
+    rspec (3.13.0)
+      rspec-core (~> 3.13.0)
+      rspec-expectations (~> 3.13.0)
+      rspec-mocks (~> 3.13.0)
+    rspec-core (3.13.2)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.3)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-its (2.0.0)
+      rspec-core (>= 3.13.0)
+      rspec-expectations (>= 3.13.0)
+    rspec-mocks (3.13.2)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-support (3.13.1)
+    rubocop (1.69.0)
+      json (~> 2.3)
+      language_server-protocol (>= 3.17.0)
+      parallel (~> 1.10)
+      parser (>= 3.3.0.2)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 2.4, < 3.0)
+      rubocop-ast (>= 1.36.1, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 2.4.0, < 4.0)
+    rubocop-ast (1.36.2)
+      parser (>= 3.3.1.0)
+    rubocop-performance (1.23.0)
+      rubocop (>= 1.48.1, < 2.0)
+      rubocop-ast (>= 1.31.1, < 2.0)
+    rubocop-rake (0.6.0)
+      rubocop (~> 1.0)
+    rubocop-rspec (3.2.0)
+      rubocop (~> 1.61)
+    ruby-progressbar (1.13.0)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-cobertura (2.1.0)
+      rexml
+      simplecov (~> 0.19)
+    simplecov-html (0.13.1)
+    simplecov_json_formatter (0.1.4)
+    unicode-display_width (3.1.2)
+      unicode-emoji (~> 4.0, >= 4.0.4)
+    unicode-emoji (4.0.4)
+    yard (0.9.37)
+
+PLATFORMS
+  arm64-darwin-23
+  ruby
+
+DEPENDENCIES
+  asciidoctor
+  codecov
+  httparty
+  puma (~> 5.0)
+  puma-daemon!
+  rack (~> 2)
+  rake (~> 13.0)
+  relaxed-rubocop
+  rspec (~> 3.0)
+  rspec-its
+  rubocop
+  rubocop-performance
+  rubocop-rake
+  rubocop-rspec
+  simplecov
+  simplecov-cobertura
+  yard
+
+BUNDLED WITH
+   2.5.23
