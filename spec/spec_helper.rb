@@ -33,6 +33,7 @@ SimpleCov.start do
 end
 
 require_relative 'support/puma_helpers'
+require 'puma/daemon/version'
 require 'puma/daemon'
 require 'stringio'
 
@@ -52,6 +53,10 @@ RSpec.configure do |config|
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+
+  config.before :suite do
+    puts "Testing Puma Daemon v#{Puma::Daemon::VERSION} for Puma v#{Puma::Server::VERSION}"
   end
 
   config.after :suite do
