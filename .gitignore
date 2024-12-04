@@ -24,5 +24,6 @@
 /tmp/*
 /tmp/pids/*
 /Gemfile
+/Gemfile.lock
 **/.DS_Store
 .envrc.local
