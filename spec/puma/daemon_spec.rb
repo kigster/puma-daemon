@@ -5,6 +5,11 @@ require 'puma/daemon/version'
 
 module Puma
   RSpec.describe Daemon do
+    # Test the version
+    it 'should have a version' do
+      expect(Daemon::VERSION).to eql('0.5.0')
+    end
+    
     let(:cli) { ::Puma::Daemon::CLI.new(argv).cli }
     let(:argv) { [] }
     let(:wait_booted) { -> { wait.sysread 1 } }
