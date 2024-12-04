@@ -223,6 +223,37 @@ NOTE: You do need a working `make` utility to use the below commands.
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/kigster/puma-daemon.
 
+== Using the `Makefile` 
+
+The project has a Makefile to assist in running multi-step commmands.
+
+Run `make` without arguments to see available targets:
+
+```
+❯ make
+ci                             Run all checks run on CI
+clean                          Clean-up
+docker-build-ruby              Builds the Docker image by compiling ruby 3.0.0
+docker-build-run               Drops you into a BASH session on ubuntu with ruby 3.0.0
+docker-download-ruby           Builds the Docker image by downloading ruby 3.0.0 image
+docker-download-run            Drops you into a BASH session on ubuntu with ruby 3.0.0
+generate-pdf                   Regenerates README,pdf from README.adoc
+help                           Prints help message auto-generated from the comments.
+puma-v5                        Installs puma 5.0.0
+puma-v6                        Installs puma 5.0.0
+rubocop                        Run rubocop
+tag-update                     Re-tag latest codebase with the existing version
+tag                            Tag with the latest .version
+test-all                       Test all supported Puma Versions
+```
+
+You can experiement with these, but perhaps the most useful you'll find the following:
+
+ * ci — runs all tests for all puma versions and then runs rubocop
+ * generate-pdf — regen PDF from README
+ 
+
+
 == License
 
 The gem is available as open source under the terms of the https://opensource.org/licenses/MIT[MIT License].

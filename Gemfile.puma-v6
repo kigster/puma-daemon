@@ -18,7 +18,7 @@ end
 
 group :test do
   gem 'codecov', require: false
-  gem 'httparty'
+  gem 'httparty', '~> 0.22'
   gem 'relaxed-rubocop'
   gem 'rspec', '~> 3.0'
   gem 'rspec-its'

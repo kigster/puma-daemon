@@ -22,14 +22,14 @@ help:	   			## Prints help message auto-generated from the comments.
 puma-v5: 			## Installs puma 5.0.0
 				@echo "——————> Building for Puma v5 <—————————"
 				@ln -nfs Gemfile.puma-v5 Gemfile
-				@bundle install
+				@bundle install -j 4
 
 puma-v6: 			## Installs puma 5.0.0
 				@echo "——————> Building for Puma v6 <—————————"
 				@ln -nfs Gemfile.puma-v6 Gemfile
-				@bundle install
+				@bundle install -j 4
 
-test:				## Runs the test suite
+test:				
 				@bundle exec rspec --color --format progress
 
 test-all:			## Test all supported Puma Versions
@@ -39,9 +39,12 @@ test-all:			## Test all supported Puma Versions
 				make test
 
 rubocop:			## Run rubocop
-				@bundle check || bundle install
+				@export BUNDLE_GEMFILE=Gemfile.puma-v6
+				@bundle check || bundle install -j 3
 				@bundle exec rubocop --format=progress --color --parallel
 
+ci:				test-all rubocop ## Run all checks run on CI
+				
 
 docker-build-ruby:		## Builds the Docker image by compiling ruby 3.0.0
 				@docker build -f Dockerfile.build    -t puma-daemon:latest .

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    puma-daemon (0.4.0)
+    puma-daemon (0.5.0)
       puma (>= 5.0)
       rack
 
@@ -97,7 +97,7 @@ PLATFORMS
 DEPENDENCIES
   asciidoctor
   codecov
-  httparty
+  httparty (~> 0.22)
   puma (~> 6)
   puma-daemon!
   rack (~> 2)
