@@ -26,7 +26,7 @@ jobs:
     - name: Run Specs for V5 Puma
       run: |
         set -x; set -e;
-        export BUNDLE_CONFIG=Gemfile.puma-v5; 
+        export BUNDLE_GEMFILE=Gemfile.puma-v5; 
         bundle install -j 4 && \    
           bundle exec rspec --color --format progress -p 2 2>/dev/null ;
         echo; echo ;
@@ -34,7 +34,7 @@ jobs:
     - name: Run Specs fo V6 Puma
       run: |    
         set -x; set -e;
-        export BUNDLE_CONFIG=Gemfile.puma-v6; 
+        export BUNDLE_GEMFILE=Gemfile.puma-v6; 
         bundle install -j 4 && \    
           bundle exec rspec --color --format progress -p 2 2>/dev/null ;
         echo; echo ;
