@@ -14,7 +14,7 @@ module Puma
         end
       end
 
-      it(:puma_default_options) { is_expected.not_to be_nil }
+      its(:puma_default_options) { is_expected.not_to be_nil }
 
       describe '#default_dsl' do
         subject { config.default_dsl.options }
