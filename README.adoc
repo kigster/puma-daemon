@@ -11,19 +11,19 @@
 |Type
 
 |Sponsor!
-|image:https://img.shields.io/liberapay/goal/kigster.svg?logo=liberapay[link=https://liberapay.com/kigster/donate,width="150"]
+|image:https://img.shields.io/liberapay/goal/kigster.svg?logo=liberapay[link=https://liberapay.com/kigster/donate,width="250"]
 
 |Test Suite
-|image:https://github.com/kigster/puma-daemon/actions/workflows/main.yml/badge.svg[link=https://github.com/kigster/puma-daemon/actions?query=workflow%3ARuby,width="150"]
+|image:https://github.com/kigster/puma-daemon/actions/workflows/main.yml/badge.svg[link=https://github.com/kigster/puma-daemon/actions?query=workflow%3ARuby,width="250"]
 
 |Licensing
-|image:https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkigster%2Fpuma-daemon.svg?type=shield[link=https://app.fossa.com/projects/git%2Bgithub.com%2Fkigster%2Fpuma-daemon?ref=badge_shield,width="150",height="100"] image:https://app.fossa.io/api/projects/custom%2B19655%2Fgithub.com%2Fkigster%2Fpuma-daemon.svg[FOSSA Status,link=https://app.fossa.io/projects/custom%2B19655%2Fgithub.com%2Fkigster%2Fpuma-daemon?ref=badge_large&issueType=license]
+|image:https://app.fossa.com/api/projects/git%2Bgithub.com%2Fkigster%2Fpuma-daemon.svg?type=shield[link=https://app.fossa.com/projects/git%2Bgithub.com%2Fkigster%2Fpuma-daemon?ref=badge_shield,width="250",height="150"]
 
 |Gem Version
-|image:https://badge.fury.io/rb/puma-daemon.svg["Gem Version",link="https://badge.fury.io/rb/puma-daemon",width="150",height="50"]
+|image:https://badge.fury.io/rb/puma-daemon.svg["Gem Version",link="https://badge.fury.io/rb/puma-daemon",width="250",height="150"]
 
 |Test Coverage
-|image:https://codecov.io/gh/kigster/puma-daemon/branch/master/graph/badge.svg?token=asxarMSGbz[link=https://codecov.io/gh/kigster/puma-daemon,width="150",height="50"]
+|image:https://codecov.io/gh/kigster/puma-daemon/branch/master/graph/badge.svg?token=asxarMSGbz[link=https://codecov.io/gh/kigster/puma-daemon,width="250",height="150"]
 
 |Coverage Areas
 |image:https://codecov.io/gh/kigster/puma-daemon/graphs/sunburst.svg?token=asxarMSGbz[coverage-graph,width="200",link=https://codecov.io/gh/kigster/puma-daemon]
@@ -223,7 +223,7 @@ NOTE: You do need a working `make` utility to use the below commands.
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/kigster/puma-daemon.
 
-== Using the `Makefile` 
+== Using the `Makefile`
 
 The project has a Makefile to assist in running multi-step commmands.
 
@@ -251,7 +251,7 @@ You can experiement with these, but perhaps the most useful you'll find the foll
 
  * ci — runs all tests for all puma versions and then runs rubocop
  * generate-pdf — regen PDF from README
- 
+
 
 
 == License
