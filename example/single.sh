@@ -1,14 +1,6 @@
 #!/usr/bin/env bash
 
-export txtblk='\e[0;30m'
-export txtred='\e[0;31m'
-export txtgrn='\e[0;32m'
-export txtylw='\e[0;33m'
-export txtblu='\e[0;34m'
-export txtpur='\e[0;35m'
-export txtcyn='\e[0;36m'
-export txtwht='\e[0;37m'
-export clr='\e[0;0m'
+source colors.sh
 
 [[ -f single.sh ]] || {
   echo -e "${txtred}Please run this from the ./example folder.${clr}"
@@ -23,7 +15,7 @@ export clr='\e[0;0m'
 
 echo -e "${txtblu}Ensuring your dependencies are installed...${clr}"
 
-( 
+(
   cd .. || exit 2;
   bundle check || bundle install
 ) >/dev/null
@@ -55,10 +47,15 @@ curl http://0.0.0.0:9292/ > "${output}" 2>/dev/null
   exit 3
 }
 
-echo -e "${txtgrn}Puma Daemon is running and returning the expected string.${clr}"
+echo -e "${txtblu} Currently Running Puma Processes:$clr"
 
-ps -ef | grep [p]uma
+ps auxww | grep [p]uma
 
 echo
+echo -e "${txtgrn}┌────────────────────────────────────────────────────────────────────────┐"
+echo -e "${txtgrn}│ Puma Daemon is UP in the Single Process mode & HTTP response is 200/OK │"
+echo -e "${txtgrn}└────────────────────────────────────────────────────────────────────────┘${clr}"
+echo
+
 
 
