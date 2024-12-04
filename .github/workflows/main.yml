@@ -9,9 +9,9 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby-version: [3.3.5, 3.2.4, 3.1.5, 3.0.7]
-
+        ruby-version: [3.3.5, 3.2.4, 3.1.5, 3.0.7]            
     env:
+      RUBY_LATEST_VERSION: "3.3.5"
       RUBY_VERSION: ${{ matrix.ruby-version }}
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
@@ -46,15 +46,9 @@ jobs:
 
     - name: Upload to Codecov
       run: |
-        if [[ $(ruby -e 'puts RUBY_VERSION') == '3.3.1' ]]; then
+        # only upload for the latest Ruby Version
+        if [[ $(ruby -e 'puts RUBY_VERSION') == "${RUBY_LATEST_VERSION}" ]]; then
           curl -Os https://uploader.codecov.io/latest/linux/codecov
           chmod +x codecov
           ./codecov
         fi
-
-#    - uses: codecov/codecov-action@v4
-#      with:
-#        fail_ci_if_error: false # optional (default = false)
-#        flags: rspecs # optional
-#        token: ${{ secrets.CODECOV_TOKEN }} # required
-#        verbose: true # optional (default = false)`
