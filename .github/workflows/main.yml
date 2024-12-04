@@ -28,16 +28,14 @@ jobs:
         set -x; set -e; \
         gem install bundler:2.5.23; \
         export BUNDLE_GEMFILE=Gemfile.puma-v5; \
-        gem install bundler:2.5.23; \
-        bundle install -j 4 && bundle exec rspec --color --format progress -p 2 2>/dev/null
+        bundle install -j 4 && bundle exec rspec 2>/dev/null
 
     - name: Run Specs fo V6 Puma
       run: |    
         set -x; set -e; \
         gem install bundler:2.5.23; \
         export BUNDLE_GEMFILE=Gemfile.puma-v6; \
-        gem install bundler:2.5.23; \
-        bundle install -j 4 && bundle exec rspec --color --format progress -p 2 2>/dev/null
+        bundle install -j 4 && bundle exec rspec 2>/dev/null
 
     - name: Rubocop
       run: |

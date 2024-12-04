@@ -15,24 +15,46 @@ export clr='\e[0;0m'
   exit 1
 }
 
-[[ -f ../Gemfile ]] || {
+[[ -n ${BUNDLE_GEMFILE} || -f ../Gemfile ]] || {
   echo -e "${txtred}Please choose either Puma v5 or Puma v6, by running:${clr}"
   echo -e "${txtgrn}make puma-v5 or make puma-v6"
   exit 2
 }
 
-echo -e "${txtblu}Ensuring your dependencies are installed...${clr}"
+
+export GEMFILE=${BUNDLE_GEMFILE}
+
+if [[ -n ${BUNDLE_GEMFILE} && -f "${BUNDLE_GEMFILE}" ]]; then
+  echo -e "${txtylw}Using GEMFILE: ${BUNDLE_GEMFILE}${clr}"
+else
+  export GEMFILE="../${BUNDLE_GEMFILE}"
+  [[ -f ${GEMFILE} ]] || {
+    echo  -e "${txtred}ERROR: File [${GEMFILE}] does not exist ${clr}"
+    exit 3
+  }
+fi
+
+echo -e "${txtylw}Installing Bundled Gems...${clr}"
 
 ( 
   cd .. || exit 2;
+  export BUNDLE_GEMFILE=${BUNDLE_GEMFILE:-"Gemfile"} ;
   bundle check || bundle install
 ) >/dev/null
+
+echo -e "${txtylw}GEMFILE in USE: ${txtgrn}${BUNDLE_GEMFILE}${clr}"
+echo
+echo -e "${txtblu}Ensuring your dependencies are installed...${clr}"
+sleep 1
+
 
 pid=$(ps -ef | grep puma | grep example | awk '{print $2}')
 
 [[ -n $pid ]] && kill $pid && sleep 1
 
 echo -e "${txtblu}Starting Puma in cluster mode.${clr}"
+
+export BUNDLE_GEMFILE=$GEMFILE
 
 command="bundle exec puma -I ../lib -C $(pwd)/puma.rb -w 4"
 echo -e "${txtblu}Running Command:"
