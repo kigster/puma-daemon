@@ -6,7 +6,7 @@ module Puma
       attr_reader :default_dsl, :file_dsl, :user_dsl
 
       def puma_default_options(*args, **opts, &block)
-        super(*args, **opts, &block).merge({ daemon: true })
+        super.merge({ daemon: true })
       end
 
       def daemonize
