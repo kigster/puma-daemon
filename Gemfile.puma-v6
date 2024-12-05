@@ -14,7 +14,8 @@ gem 'rake', '~> 13.0'
 group :development, :test do
   gem 'asciidoctor'
   gem 'yard'
-end
+  gem 'github_changelog_generator'
+ end
 
 group :test do
   gem 'codecov', require: false
