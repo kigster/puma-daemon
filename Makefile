@@ -15,6 +15,7 @@ PUMAD_HOME			:= $(shell dirname $(MAKEFILE_PATH))
 VERSION 			:= $(shell bundle exec ruby -I lib -r puma-daemon.rb -e 'puts Puma::Daemon::VERSION')
 TAG 				:= $(shell echo "v$(VERSION)")
 BRANCH          		:= $(shell git branch --show)
+GITHUB_TOKEN          		:= $(shell git config user.token)
 
 help:	   			## Prints help message auto-generated from the comments.
 				@grep -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -28,6 +29,9 @@ puma-v6: 			## Installs puma 5.0.0
 				@echo "——————> Building for Puma v6 <—————————"
 				@ln -nfs Gemfile.puma-v6 Gemfile
 				@bundle install -j 4
+
+changelog:  			puma-v6 ## Re-Generate CHANGELOG 
+				@bundle exec github_changelog_generator --user kigster --project puma-daemon -t $(GITHUB_TOKEN)
 
 test:				
 				@bundle exec rspec --color --format progress
