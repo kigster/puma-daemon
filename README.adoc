@@ -68,7 +68,7 @@ Finally, the code which previously daemonized Puma in version 4 was not really m
 
 === What does `puma-daemon` do?
 
-We thought that while the core Puma removing daemonization was the right move, it felt useful in some occastions and so we created this gem to restore the daemonization functionality to Puma v5+.
+We thought that while the core Puma removing daemonization was the right move, it felt useful in some occasions and so we created this gem to restore the daemonization functionality to Puma v5+.
 
 == Compatibility
 
